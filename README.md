@@ -4,7 +4,11 @@ An index of AI-assisted development tools, skills, and methodologies for modern 
 
 This repository exists to help both new and existing projects pick the right AI companion — whether it's a planning framework, a spec-first workflow, or an autonomous orchestration layer.
 
-> **Status**: Seed list. Descriptions are intentionally terse; this repo is meant to be maintained incrementally.
+> **Status**: Planning (v0.1.0). This table is the legacy human-readable index.
+> The **source of truth is the structured registry** under [`registry/tools/`](registry/tools/),
+> governed by [`registry/schema.yaml`](registry/schema.yaml). See [`PLAN.md`](PLAN.md) for the
+> data model, taxonomy, skill-versioning scheme, and roadmap, and [`CHANGELOG.md`](CHANGELOG.md)
+> for what changed between versions. Verified tool version numbers land in Step 2.
 
 ---
 
@@ -12,19 +16,19 @@ This repository exists to help both new and existing projects pick the right AI 
 
 | Name          | Category         | One-liner                                              |
 |---------------|------------------|--------------------------------------------------------|
-| **GSD**       | Workflow         | Phase-based planning & execution skill (OpenCode).     |
+| **GSD**       | Orchestration    | Git. Ship. Done — fresh-context subagents for long tasks.|
 | **BMAD**      | Methodology      | AI-first development method driven by personas.        |
 | **Spec Kit**  | Specification    | Spec-driven development toolkit.                       |
 | **Kiro**      | IDE / Agent      | AWS-backed AI coding agent with spec-to-code flow.     |
-| **penSpec**   | Specification    | Spec authoring & refinement for AI agents.             |
+| **OpenSpec**  | Specification    | Lightweight spec layer to align humans & AI before code.|
 | **Superpowers** | Capability     | Extended capability pack for coding agents.            |
 | **Trellis**   | Management       | AI-guided project planning & tracking framework.       |
-| **CCW**       | Workflow         | Claude Code Workspace conventions.                     |
+| **CCW**       | Orchestration    | Claude-Code-Workflow: skill workflow + multi-CLI orchestration.|
 | **Agent OS**  | Orchestration    | Operating-system-style layer for AI agents.            |
 | **Taskmaster**| Task Mgmt        | AI-native task management / breakdown.                 |
-| **OMC**       | Skill            | Skill / orchestration module (OpenCode ecosystem).     |
+| **OMC**       | Orchestration    | oh-my-claudecode: teams-first multi-agent orchestration.|
 | **CCG**       | Generation       | Code-generation-focused agent skill.                   |
-| **ECC**       | Execution        | Execution-focused companion for Claude/Code agents.    |
+| **ECC**       | Skill            | Everything Claude Code: large agents/skills/hooks pack. |
 | **gstack**    | Tooling          | Utility stack for AI-assisted delivery.                |
 | **Ralph**     | Loop / Autonomy  | Self-referential execution loop for coding agents.     |
 | **CodeStable**| Stability        | Stability-focused agent workflow.                      |

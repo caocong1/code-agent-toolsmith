@@ -1,0 +1,101 @@
+# registry/schema.yaml
+# Field specification for every tool entry under registry/tools/<id>.yaml.
+# This is a human-readable spec (Step 1). A machine-enforceable JSON Schema
+# is planned for Step 3 (see PLAN.md Roadmap).
+
+fields:
+  id:
+    type: string
+    required: true
+    rule: "lowercase, hyphenated, stable; MUST equal the filename without extension"
+    example: "openspec"
+
+  name:
+    type: string
+    required: true
+    desc: "Display name"
+    example: "OpenSpec"
+
+  aliases:
+    type: list<string>
+    required: false
+    desc: "Full names / abbreviations the tool is also known by"
+    example: ["CCW = Claude-Code-Workflow"]
+
+  primary_category:
+    type: enum
+    required: true
+    values: [base-standard, spec, skill, orchestration, ide-platform, directory]
+    desc: "Primary taxonomy bucket (see PLAN.md §3)"
+
+  tags:
+    type: list<string>
+    required: false
+    desc: "Secondary categories / keywords; may include other category codes for cross-layer tools"
+
+  summary:
+    type: string
+    required: true
+    rule: "one line, one claim"
+
+  source:
+    type: object
+    required: true
+    fields:
+      repo: { type: string, required: false, desc: "VCS URL" }
+      homepage: { type: string, required: false, desc: "Docs/landing URL" }
+
+  version:
+    type: object
+    required: true
+    desc: "Version triple, tolerant of tools without formal releases"
+    fields:
+      kind:
+        type: enum
+        values: [release, tag, commit, date, rolling, none]
+        desc: "release/tag if published; commit if pinning a SHA; date for snapshot-by-date; rolling if no version concept; none if unknown"
+      ref:
+        type: string
+        desc: "The actual value: e.g. 'v1.4.0', a commit SHA, '2026-06-01', or 'rolling'. Use 'TBD' until verified."
+      released_at:
+        type: string|null
+        desc: "Release/commit date YYYY-MM-DD if known, else null"
+
+  verified_at:
+    type: string|null
+    required: true
+    desc: "Date we last verified version.ref against the source (YYYY-MM-DD); null until verified"
+    rule: "MUST NOT be guessed. If null, version.ref should be 'TBD'."
+
+  status:
+    type: enum
+    required: true
+    values: [active, maintained, deprecated, removed, unknown]
+    desc: "removed entries are KEPT (not deleted); add removed_at"
+
+  removed_at:
+    type: string|null
+    required: false
+    desc: "Date the tool was observed gone/abandoned (YYYY-MM-DD), only when status=removed"
+
+  ecosystem:
+    type: list<string>
+    required: false
+    desc: "Target agents/CLIs"
+    example: ["claude-code", "codex", "cursor", "opencode", "gemini"]
+
+  first_seen:
+    type: string
+    required: true
+    desc: "Skill version (SemVer) at which this tool was first added"
+    example: "0.2.0"
+
+  last_changed:
+    type: string
+    required: true
+    desc: "Skill version (SemVer) of the most recent change to this entry"
+
+  notes:
+    type: string
+    required: false
+    desc: "Risks, security signals, suitable scenarios"

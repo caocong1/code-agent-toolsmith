@@ -1,0 +1,41 @@
+# Worked example entry (Step 1).
+# Descriptive fields are filled from the seed analysis; VERSION fields are
+# intentionally left unverified (TBD / null) — they get filled in Step 2 after
+# checking https://github.com/Fission-AI/OpenSpec releases. Do not guess versions.
+
+id: openspec
+name: OpenSpec
+aliases:
+  - "OpenSpec by Fission-AI"
+
+primary_category: spec
+tags:
+  - sdd
+  - brownfield
+  - lightweight
+
+summary: "Lightweight spec layer — specs/ as current state, changes/ as proposals — to align humans and AI before coding."
+
+source:
+  repo: "https://github.com/Fission-AI/OpenSpec"
+  homepage: "https://github.com/Fission-AI/OpenSpec"
+
+version:
+  kind: none        # TBD: confirm whether OpenSpec publishes releases/tags in Step 2
+  ref: "TBD"
+  released_at: null
+
+verified_at: null   # not yet verified against the source
+
+status: active
+
+ecosystem:
+  - claude-code
+  - codex
+  - cursor
+  - opencode
+
+first_seen: "0.1.0"
+last_changed: "0.1.0"
+
+notes: "Brownfield-first. Highest bang-for-buck spec layer; main risk is spec drift — specs must be kept in sync with code or they mislead the AI."
