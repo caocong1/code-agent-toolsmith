@@ -1,0 +1,77 @@
+# Trellis — registry entry. Verified 2026-06-18 (see provenance).
+
+id: trellis
+name: Trellis
+aliases:
+  - "mindfold-ai/trellis"
+
+primary_category: orchestration
+tags:
+  - memory
+  - cross-session
+  - cross-cli
+
+summary: "Persists specs, tasks, and memory into the repo (.trellis/) so any agent resumes cross-session context and work ports across CLIs."
+
+source:
+  repo: "https://github.com/mindfold-ai/trellis"
+  homepage: "https://trytrellis.app"
+
+version:
+  kind: release
+  ref: "v0.5.15"
+  released_at: "2026-06-17"
+
+verified_at: "2026-06-18"
+
+status: active
+
+ecosystem:
+  - claude-code
+  - cursor
+  - codex
+  - opencode
+  - gemini-cli
+
+first_seen: "0.3.0"
+last_changed: "0.3.0"
+
+notes: >-
+  AGPL-3.0 (copyleft — review before use in closed-source products). Strong for
+  cross-session memory and cross-CLI portability; still pre-1.0 (v0.x).
+
+profile:
+  problem_solved: "Every agent session starts from scratch; Trellis persists specs/tasks/memory in-repo so context survives across sessions and tools."
+  strengths:
+    - "Durable cross-session memory (journals auto-inject context)"
+    - "Cross-CLI portability (works across many agents)"
+    - "Spec/task structure with an audit trail in git"
+  weaknesses:
+    - "AGPL-3.0 license may be disqualifying for some orgs"
+    - "Requires repo integration; overhead for simple projects"
+    - "Pre-1.0 (v0.x)"
+  token_cost_profile: medium
+  learning_curve: medium
+  setup_complexity: medium
+  maturity: emerging
+  team_fit: both
+  project_fit: both
+  autonomy_level: supervised
+  multi_model: true
+  security_signals:
+    - "AGPL-3.0 copyleft — review license obligations before commercial / closed-source use"
+    - "Writes state under .trellis/ — review what is persisted"
+  plays_well_with:
+    - openspec
+    - agents-md
+  conflicts_with:
+    - ralph
+    - gsd
+    - ccw
+    - gstack
+  best_fit: "Multi-CLI team or long-running project that needs context to survive across sessions."
+  anti_fit: "A single quick task, or an org that can't take an AGPL dependency."
+  provenance:
+    - "https://github.com/mindfold-ai/trellis"
+    - "https://trytrellis.app"
+  profile_verified_at: "2026-06-18"

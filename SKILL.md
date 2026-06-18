@@ -15,9 +15,10 @@ compatibility: >-
   etc.). Reads local registry YAML and reference files. Requires no network and
   no strong-model calls.
 metadata:
-  version: "0.2.0"
+  version: "0.3.0"
   source_of_truth: registry/tools/
   schema: registry/schema.yaml
+  schema_json: registry/schema.json
   taxonomy: references/taxonomy.md
   changelog: CHANGELOG.md
 ---

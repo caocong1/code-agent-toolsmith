@@ -1,0 +1,71 @@
+# Agent OS — registry entry. Verified 2026-06-18 (see provenance).
+
+id: agent-os
+name: Agent OS
+aliases:
+  - "Builder Methods Agent OS"
+
+primary_category: spec
+tags:
+  - standards
+  - brownfield
+  - lightweight
+
+summary: "Lightweight standards layer that discovers, documents, and injects a codebase's conventions into AI agents so output matches team practice."
+
+source:
+  repo: "https://github.com/buildermethods/agent-os"
+  homepage: "https://buildermethods.com/agent-os"
+
+version:
+  kind: release
+  ref: "v3.0.0"
+  released_at: "2026-01-20"
+
+verified_at: "2026-06-18"
+
+status: active
+
+ecosystem:
+  - claude-code
+  - cursor
+  - windsurf
+  - codex
+  - gemini-cli
+
+first_seen: "0.3.0"
+last_changed: "0.3.0"
+
+notes: >-
+  MIT. Narrower than Spec Kit / BMAD — standards injection, not a full lifecycle.
+  Smaller community (~5k stars) but actively maintained; strong for legacy
+  modernization. Lightest spec-layer option; can complement a heavier SDD tool.
+
+profile:
+  problem_solved: "Captures a brownfield codebase's implicit conventions into machine-readable standards the agent respects without re-prompting."
+  strengths:
+    - "Simple discover → inject → shape workflow; low friction"
+    - "Lightweight standards focus; good for legacy modernization"
+    - "Tight Claude Code slash-command integration"
+  weaknesses:
+    - "Narrow scope (standards only; no full SDD lifecycle)"
+    - "Smaller community than peers"
+  token_cost_profile: low
+  learning_curve: low
+  setup_complexity: low
+  maturity: emerging
+  team_fit: both
+  project_fit: both
+  autonomy_level: assisted
+  multi_model: true
+  security_signals: []
+  plays_well_with:
+    - agents-md
+    - openspec
+  conflicts_with: []
+  best_fit: "Brownfield team that wants the agent to follow existing conventions with minimal ceremony."
+  anti_fit: "Greenfield project needing a full requirements → design → tasks lifecycle."
+  provenance:
+    - "https://github.com/buildermethods/agent-os/releases"
+    - "https://buildermethods.com/agent-os"
+  profile_verified_at: "2026-06-18"

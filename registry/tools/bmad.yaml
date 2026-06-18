@@ -1,0 +1,77 @@
+# BMAD-METHOD — registry entry. Verified 2026-06-18 (see provenance).
+
+id: bmad
+name: BMAD-METHOD
+aliases:
+  - "BMAD"
+  - "Breakthrough Method of Agile AI-Driven Development"
+
+primary_category: spec
+tags:
+  - sdd
+  - agile
+  - multi-agent
+  - lifecycle
+
+summary: "Agile SDD framework that casts AI agents as roles (PM/Architect/Dev/QA) driving a full PRD → architecture → stories → build lifecycle."
+
+source:
+  repo: "https://github.com/bmad-code-org/BMAD-METHOD"
+  homepage: "https://docs.bmad-method.org"
+
+version:
+  kind: release
+  ref: "v6.8.0"
+  released_at: "2026-05-25"
+
+verified_at: "2026-06-18"
+
+status: active
+
+ecosystem:
+  - claude-code
+  - cursor
+  - copilot
+  - gemini-cli
+  - codex
+
+first_seen: "0.3.0"
+last_changed: "0.3.0"
+
+notes: >-
+  MIT. Heaviest of the spec tools — full agile lifecycle with role personas;
+  needs Node 20+ / Python 3.10+ / uv. Best for teams and complex systems;
+  overkill for solo or small tasks.
+
+profile:
+  problem_solved: "Makes AI a predictable, auditable multi-agent team with versioned docs as the source of truth."
+  strengths:
+    - "Full lifecycle: PRD → architecture → stories → dev → QA"
+    - "Role personas + audit-ready versioned artifacts"
+    - "Scales to enterprise / compliance needs"
+  weaknesses:
+    - "High upfront planning overhead"
+    - "Non-trivial toolchain (Node / Python / uv)"
+    - "Overkill for solo or ad-hoc fixes"
+  token_cost_profile: high
+  learning_curve: medium
+  setup_complexity: high
+  maturity: established
+  team_fit: team
+  project_fit: both
+  autonomy_level: supervised
+  multi_model: true
+  security_signals:
+    - "Multi-agent runs touch many files — keep human review gates on critical steps"
+  plays_well_with:
+    - agents-md
+  conflicts_with:
+    - openspec
+    - spec-kit
+    - kiro
+  best_fit: "Team building a complex, long-lived system that needs auditable agile rigor."
+  anti_fit: "Solo dev, rapid prototype, or a one-off fix."
+  provenance:
+    - "https://github.com/bmad-code-org/BMAD-METHOD/releases"
+    - "https://docs.bmad-method.org"
+  profile_verified_at: "2026-06-18"

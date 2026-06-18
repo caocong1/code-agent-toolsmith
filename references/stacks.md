@@ -34,7 +34,7 @@ layer — always confirm version/links from `registry/tools/<id>.yaml` and mark
 ## Orchestrated
 - **Layers**: `base-standard` + `spec` + one `orchestration` harness.
 - **Default for**: large/long/multi-day tasks, multi-model availability, higher autonomy tolerance.
-- **Typical fill**: AGENTS.md + a spec layer + **one** of GSD (long context-heavy tasks) / Trellis (cross-session memory & standards) / CCG·CCW (multi-model review) / gstack (product/QA/security review committee).
+- **Typical fill**: AGENTS.md + a spec layer + **one** of GSD (long context-heavy tasks) / Trellis (cross-session memory) / CCW (multi-model workflow-as-code) / gstack (QA/security review committee). _"CCG / ask three models" is a pattern, not a canonical tool — see `registry/tools/ccg.yaml`._
 - **Posture**: highest token cost; **requires strong tests**. Pick exactly one primary loop authority — never stack two harnesses.
 
 ## Selection cheatsheet
@@ -46,4 +46,4 @@ layer — always confirm version/links from `registry/tools/<id>.yaml` and mark
 | solo + wants quality, no orchestration | Disciplined solo |
 | long task + multi-model + strong tests | Orchestrated |
 | "context keeps getting lost across sessions" | add Trellis (memory) over raw GSD |
-| "want cross-model review" | CCG (ask three models) / CCW (continuous workflow) — only when needed |
+| "want cross-model review" | CCW (workflow-as-code) — only when needed; "CCG / ask three models" is an _unverified pattern_, audit a specific impl |

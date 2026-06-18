@@ -8,11 +8,48 @@ Each released version also pins the versions of every tracked tool in
 
 ## [Unreleased]
 
-_Next (Phase 2): extend `registry/schema.yaml` with the `profile:` block
-(strengths/weaknesses/token_cost/conflicts_with/…), add `registry/schema.json`,
-backfill per-tool profiles, and produce the first complete snapshot
-`snapshots/v<version>.yaml`. Then (Phase 3) the fully-automated self-update
-pipeline under `pipeline/`._
+_Next (Phase 3): the fully-automated self-update pipeline under `pipeline/` —
+discover candidates → strong-model research → normalize → validation gate
+(`pipeline/validate.py`) → regenerate snapshot/CHANGELOG/README → open a
+human-reviewable PR (never push to the default branch directly)._
+
+## [0.3.0] — 2026-06-18
+
+Populated and profiled the knowledge base (Phase 2). The advisor's
+recommendations now resolve against real, web-verified tool data instead of
+prose names.
+
+### Added
+- `registry/schema.yaml`: a `profile:` block — `problem_solved`, `strengths`,
+  `weaknesses`, `token_cost_profile`, `learning_curve`, `setup_complexity`,
+  `maturity`, `team_fit`, `project_fit`, `autonomy_level`, `multi_model`,
+  `security_signals`, `plays_well_with`, `conflicts_with`, `best_fit`,
+  `anti_fit`, `provenance`, `profile_verified_at`.
+- `registry/schema.json`: machine-enforceable mirror (JSON Schema 2020-12) — the
+  validation gate Phase 3 reuses.
+- `registry/tools/`: 12 new profiled entries — `spec-kit`, `bmad`, `agent-os`,
+  `kiro`, `superpowers`, `ralph`, `gsd`, `trellis`, `ccw`, `gstack`, `ccg`,
+  `agents-md` — each with web-verified versions (2026-06-18) and `provenance` URLs.
+- `snapshots/v0.3.0.yaml`: first frozen tool-version snapshot (13 tools).
+- `pipeline/validate.py` + `pipeline/snapshot.py`: the registry validation gate
+  (schema + `verified_at` discipline + `conflicts_with` symmetry + reference
+  integrity) and the snapshot generator.
+
+### Changed
+- `registry/tools/openspec.yaml`: verified to v1.4.1 (2026-06-03) and given a
+  full `profile:`.
+- `SKILL.md`: bumped to 0.3.0; added `metadata.schema_json`.
+- `README.md`: tool table rebuilt to mirror the registry with verified versions.
+- `references/stacks.md`: CCG references softened to reflect it is a pattern.
+
+### Notes
+- **CCG is recorded as an UNVERIFIED pattern** (`status: unknown`, `version.ref:
+  TBD`), not a canonical tool: research found multiple incompatible community
+  implementations and no canonical owner. The registry flags this rather than
+  fabricate an entry — matching the project's no-hallucination rule.
+- Tools named in the taxonomy but not yet profiled (Taskmaster, CodeStable,
+  Comet, ECC, OMC, SuperClaude) remain name-only; the advisor degrades
+  gracefully and marks them "unverified".
 
 ## [0.2.0] — 2026-06-18
 

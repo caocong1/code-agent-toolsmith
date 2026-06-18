@@ -1,7 +1,8 @@
 # registry/schema.yaml
 # Field specification for every tool entry under registry/tools/<id>.yaml.
-# This is a human-readable spec (Step 1). A machine-enforceable JSON Schema
-# is planned for Step 3 (see PLAN.md Roadmap).
+# Human-readable spec. The machine-enforceable mirror is registry/schema.json
+# (validate with `python -m jsonschema` or `ajv`). Keep the two in sync; the
+# Phase 3 self-update pipeline reuses schema.json as its validation gate.
 
 fields:
   id:
@@ -99,3 +100,73 @@ fields:
     type: string
     required: false
     desc: "Risks, security signals, suitable scenarios"
+
+  profile:
+    type: object
+    required: false
+    desc: >-
+      Decision-support profile read by the recommendation rubric
+      (references/decision-framework.md). Optional: when absent or partial the
+      rubric MUST degrade gracefully — treat unknowns conservatively (e.g.
+      unknown token cost ⇒ assume medium) and mark them "unverified" in the plan.
+    fields:
+      problem_solved:
+        type: string
+        desc: "One line: the core problem this tool addresses"
+      strengths:
+        type: list<string>
+        desc: "Concrete strengths (each a short claim)"
+      weaknesses:
+        type: list<string>
+        desc: "Concrete weaknesses / limitations"
+      token_cost_profile:
+        type: enum
+        values: [low, medium, high]
+        desc: "Typical per-task token overhead the tool tends to add"
+      learning_curve:
+        type: enum
+        values: [low, medium, high]
+      setup_complexity:
+        type: enum
+        values: [low, medium, high]
+      maturity:
+        type: enum
+        values: [experimental, emerging, established]
+        desc: "Project maturity (proxy: age, stars, release cadence)"
+      team_fit:
+        type: enum
+        values: [solo, team, both]
+      project_fit:
+        type: enum
+        values: [greenfield, brownfield, both]
+      autonomy_level:
+        type: enum
+        values: [assisted, supervised, autonomous]
+        desc: "assisted = inline help; supervised = multi-step with human gates; autonomous = full-auto loop"
+      multi_model:
+        type: boolean
+        desc: "Whether the tool exploits / requires more than one model"
+      security_signals:
+        type: list<string>
+        desc: "Concrete risk flags (e.g. runs unbounded shell in a loop; installs third-party skills — audit first); [] if none notable"
+      plays_well_with:
+        type: list<string>
+        desc: "Registry ids of tools that compose well (usually different layers)"
+      conflicts_with:
+        type: list<string>
+        desc: >-
+          Registry ids that must NOT be co-recommended (same-layer rivals, or
+          systems claiming the same dir). MUST be symmetric: if A lists B, B lists A.
+      best_fit:
+        type: string
+        desc: "One line: the situation this is the right pick for"
+      anti_fit:
+        type: string
+        desc: "One line: the situation to NOT use it for"
+      provenance:
+        type: list<string>
+        desc: "Source URLs the profile/version facts were drawn from"
+      profile_verified_at:
+        type: string|null
+        desc: "Date the profile was last checked against sources (YYYY-MM-DD); null until verified"
+        rule: "MUST NOT be guessed; same discipline as verified_at"

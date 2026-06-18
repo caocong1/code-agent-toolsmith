@@ -1,0 +1,74 @@
+# Spec Kit — registry entry. Verified 2026-06-18 (see provenance).
+
+id: spec-kit
+name: Spec Kit
+aliases:
+  - "GitHub Spec Kit"
+
+primary_category: spec
+tags:
+  - sdd
+  - greenfield
+  - github
+
+summary: "GitHub's spec-driven toolkit: a structured Spec → Plan → Tasks → Implement workflow that treats specifications as executable artifacts."
+
+source:
+  repo: "https://github.com/github/spec-kit"
+  homepage: "https://github.github.com/spec-kit/"
+
+version:
+  kind: release
+  ref: "0.11.1"
+  released_at: "2026-06-17"
+
+verified_at: "2026-06-18"
+
+status: active
+
+ecosystem:
+  - claude-code
+  - copilot
+  - gemini-cli
+  - cursor
+  - codex
+  - windsurf
+
+first_seen: "0.3.0"
+last_changed: "0.3.0"
+
+notes: >-
+  MIT. Requires uv + Python 3.11+ + Git. Fuller SDD than OpenSpec — good for
+  greenfield / long-lived projects; heavier setup and ceremony.
+
+profile:
+  problem_solved: "Turns ad-hoc AI coding into a disciplined spec → plan → tasks → implement pipeline."
+  strengths:
+    - "Backed by GitHub; broad multi-agent support"
+    - "Structured artifacts suit long-lived / greenfield projects"
+    - "Extensible org standards via presets"
+  weaknesses:
+    - "Heavier setup (uv / Python / Git toolchain)"
+    - "Upfront ceremony can be overkill for small or brownfield changes"
+  token_cost_profile: medium
+  learning_curve: medium
+  setup_complexity: medium
+  maturity: established
+  team_fit: both
+  project_fit: both
+  autonomy_level: supervised
+  multi_model: true
+  security_signals:
+    - "Org-standard presets inject content into agent context — review presets before adopting"
+  plays_well_with:
+    - agents-md
+  conflicts_with:
+    - openspec
+    - bmad
+    - kiro
+  best_fit: "New, long-lived project that can afford fuller SDD ceremony for maintainability."
+  anti_fit: "Quick one-offs, or brownfield slices where heavy specs add friction."
+  provenance:
+    - "https://github.com/github/spec-kit/releases"
+    - "https://github.github.com/spec-kit/"
+  profile_verified_at: "2026-06-18"
