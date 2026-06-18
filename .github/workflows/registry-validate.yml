@@ -1,0 +1,22 @@
+name: registry-validate
+
+# Gate every change to the knowledge base with the same checks the self-update
+# pipeline uses: schema conformance + verified_at discipline + conflicts_with
+# symmetry + reference integrity. See pipeline/validate.py.
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install pyyaml jsonschema
+      - name: Validate registry against schema.json
+        run: python3 pipeline/validate.py

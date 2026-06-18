@@ -8,10 +8,20 @@ Each released version also pins the versions of every tracked tool in
 
 ## [Unreleased]
 
-_Next (Phase 3): the fully-automated self-update pipeline under `pipeline/` —
-discover candidates → strong-model research → normalize → validation gate
-(`pipeline/validate.py`) → regenerate snapshot/CHANGELOG/README → open a
-human-reviewable PR (never push to the default branch directly)._
+### Added (Phase 3 foundation)
+- `pipeline/research-playbook.md` — the self-update orchestration prompt
+  (discover → research → normalize → validate → snapshot → human-review PR),
+  codifying the v0.3.0 process with its no-hallucination / provenance /
+  deprecate-don't-delete guardrails.
+- `pipeline/sources.yaml` — discovery sources, search queries, and the
+  named-but-unprofiled backlog (taskmaster, codestable, comet, ecc, omc, superclaude).
+- `pipeline/README.md` — how to run the loop manually today and what unattended
+  scheduling requires.
+- `.github/workflows/registry-validate.yml` — CI gate running `pipeline/validate.py`
+  on every push / PR, so human and automated changes face the same checks.
+
+_Still deferred: the unattended scheduled runner (needs model-API + web on the CI
+runner — environment-dependent; see `PLAN.md` open item #6)._
 
 ## [0.3.0] — 2026-06-18
 
