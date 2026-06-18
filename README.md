@@ -1,63 +1,67 @@
 # Code Agent Toolsmith
 
-An index of AI-assisted development tools, skills, and methodologies for modern code agents.
+**An AI tool-selection advisor for AI-assisted coding** — delivered as an Agent
+Skill. Instead of just listing tools, it interviews your situation, recommends a
+*right-sized* stack of AI coding tools/skills/methodologies, and writes a concrete
+adoption plan (方案) with setup steps and cautions. It is itself an AI coding
+tool, but its job is to recommend **other** AI coding tools.
 
-This repository exists to help both new and existing projects pick the right AI companion — whether it's a planning framework, a spec-first workflow, or an autonomous orchestration layer.
+It is **model-agnostic** and runs inside whatever agent you already use (Claude
+Code, etc.). The recommendation side needs no network and no extra model; strong
+models are used only in the offline self-update pipeline that keeps the tool
+knowledge fresh.
 
-> **Status**: Planning (v0.1.0). This table is the legacy human-readable index.
-> The **source of truth is the structured registry** under [`registry/tools/`](registry/tools/),
-> governed by [`registry/schema.yaml`](registry/schema.yaml). See [`PLAN.md`](PLAN.md) for the
-> data model, taxonomy, skill-versioning scheme, and roadmap, and [`CHANGELOG.md`](CHANGELOG.md)
-> for what changed between versions. Verified tool version numbers land in Step 2.
+> **Status**: v0.2.0 — advisor workflow skeleton (Phase 1). The 4-scenario
+> recommendation flow, interview model, decision rubric, and plan template are in
+> place. Deep per-tool profiles and the self-update pipeline land in later phases
+> (see [`PLAN.md`](PLAN.md) and the plan history).
 
----
+## What it does — 4 scenarios
 
-## Tooling Index
+1. **New project** — requirements set, about to start with a code agent → analyze requirements, recommend a stack, generate a usage plan.
+2. **Brownfield, adopt** — existing codebase with no AI tooling, adding/changing features → recommend a lightweight, drift-resistant stack.
+3. **Optimize / switch** — already using AI tooling but unhappy → audit, then recommend what to *retire* before adding.
+4. **Quick one-off** — a throwaway feature → usually "don't adopt a methodology; here's the minimal approach."
 
-| Name          | Category         | One-liner                                              |
-|---------------|------------------|--------------------------------------------------------|
-| **GSD**       | Orchestration    | Git. Ship. Done — fresh-context subagents for long tasks.|
-| **BMAD**      | Methodology      | AI-first development method driven by personas.        |
-| **Spec Kit**  | Specification    | Spec-driven development toolkit.                       |
-| **Kiro**      | IDE / Agent      | AWS-backed AI coding agent with spec-to-code flow.     |
-| **OpenSpec**  | Specification    | Lightweight spec layer to align humans & AI before code.|
-| **Superpowers** | Capability     | Extended capability pack for coding agents.            |
-| **Trellis**   | Management       | AI-guided project planning & tracking framework.       |
-| **CCW**       | Orchestration    | Claude-Code-Workflow: skill workflow + multi-CLI orchestration.|
-| **Agent OS**  | Orchestration    | Operating-system-style layer for AI agents.            |
-| **Taskmaster**| Task Mgmt        | AI-native task management / breakdown.                 |
-| **OMC**       | Orchestration    | oh-my-claudecode: teams-first multi-agent orchestration.|
-| **CCG**       | Generation       | Code-generation-focused agent skill.                   |
-| **ECC**       | Skill            | Everything Claude Code: large agents/skills/hooks pack. |
-| **gstack**    | Tooling          | Utility stack for AI-assisted delivery.                |
-| **Ralph**     | Loop / Autonomy  | Self-referential execution loop for coding agents.     |
-| **CodeStable**| Stability        | Stability-focused agent workflow.                      |
-| **Comet**     | Workflow         | Lightweight AI workflow accelerator.                   |
+## How it works
 
-> **Category key**: Workflow · Methodology · Specification · Orchestration · Task Mgmt · IDE/Agent · Skill · Generation · Execution · Tooling · Loop/Autonomy · Stability · Capability.
+- The advisor logic is the **skill**: [`SKILL.md`](SKILL.md) (spine + routing + hard rules) → [`scenarios/`](scenarios/) (per-scenario branches) → [`references/`](references/) (interview, decision framework, stacks, anti-patterns, taxonomy) → [`templates/plan-template.md`](templates/plan-template.md) (the output 方案).
+- The **knowledge base** is the registry: [`registry/tools/`](registry/tools/) (one YAML per tool, the source of truth for versions/links/profiles), governed by [`registry/schema.yaml`](registry/schema.yaml).
+- It reasons in **layers** (see [`references/taxonomy.md`](references/taxonomy.md)): a stack is a choice of which layers to turn on and which one tool fills each.
 
----
+## Tooling Index (knowledge base, human view)
 
-## How to Use This Repo
+Categories use the layer taxonomy: `base-standard · spec · skill · orchestration · ide-platform · directory`.
+Versions/links/deep profiles live in `registry/tools/*.yaml` (being populated).
 
-- **New project**: scan the table, pick a category that fits your team's current pain point, dive into that tool's own docs.
-- **Existing project**: look for a tool that plugs into the layer you already have (e.g. if you already use OpenCode, start from the `Skill` / `Orchestration` rows).
-- **Comparison**: the table is intentionally shallow — the goal is routing, not evaluation. Deep dives belong in each tool's home repo.
+| Name          | Layer          | One-liner                                              |
+|---------------|----------------|--------------------------------------------------------|
+| **OpenSpec**  | spec           | Lightweight spec layer to align humans & AI before code.|
+| **Spec Kit**  | spec           | Spec-driven development toolkit.                        |
+| **BMAD**      | spec           | AI-first agile development driven by personas.          |
+| **Agent OS**  | spec           | Injects codebase standards; writes better specs.        |
+| **Taskmaster**| spec           | AI-native task breakdown from a PRD.                    |
+| **CodeStable**| spec           | Lifecycle capture of requirements/decisions/constraints.|
+| **Comet**     | spec           | Lightweight AI workflow accelerator (OpenSpec×Superpowers).|
+| **Kiro**      | ide-platform   | AWS-backed AI IDE with a spec-to-code flow.            |
+| **Superpowers**| skill         | Engineering-methodology skill pack (TDD/plan/review).  |
+| **ECC**       | skill          | Everything Claude Code: large agents/skills/hooks pack. |
+| **GSD**       | orchestration  | Git. Ship. Done — fresh-context subagents for long tasks.|
+| **Trellis**   | orchestration  | Repo-persistent specs/tasks/memory; agent harness.     |
+| **OMC**       | orchestration  | oh-my-claudecode: teams-first multi-agent orchestration.|
+| **CCW**       | orchestration  | Claude-Code-Workflow: skill workflow + multi-CLI.      |
+| **CCG**       | orchestration  | Claude+Codex+Gemini multi-model workflow engine.       |
+| **gstack**    | orchestration  | Role-team (CEO/Eng/QA/security/release) review layer.  |
+| **Ralph**     | orchestration  | Autonomous PRD-driven execution loop.                  |
 
----
+> Base-standard layer (AGENTS.md, Agent Skills/SKILL.md, Cursor Rules) and
+> directory layer (awesome-lists, MCP Market, plugin hubs) are tracked in the
+> registry but omitted from this table — see `references/taxonomy.md`.
 
-## Contributing
+## How to use this repo
 
-This is a living index. PRs welcome to:
-
-- Fix a description
-- Add a tool
-- Recategorize
-- Link to a real homepage
-
-Keep entries **one line, one claim**. Depth belongs elsewhere.
-
----
+- **As an advisor**: invoke the skill in your agent and describe your situation; it routes to the right scenario, asks a few questions, and produces a 方案.
+- **As a maintainer**: add/update tools under `registry/tools/` per `registry/schema.yaml`; record changes in [`CHANGELOG.md`](CHANGELOG.md); never fabricate versions (mark "unverified" until checked).
 
 ## License
 
