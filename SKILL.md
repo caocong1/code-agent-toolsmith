@@ -61,26 +61,33 @@ models — you read local knowledge, reason, and produce a written plan.
    reversible step; the re-evaluation checkpoint.
 
 ## Scenario routing — load EXACTLY ONE
-| If the situation is…                  | Load                              |
-|---------------------------------------|-----------------------------------|
-| new project, requirements known       | `scenarios/new-project.md`        |
-| existing codebase, no AI tooling yet  | `scenarios/brownfield-adopt.md`   |
-| existing AI tooling, unsatisfied      | `scenarios/brownfield-optimize.md`|
-| quick / throwaway / one-off           | `scenarios/quick-oneoff.md`       |
-| unsure                                | ask interview **Q0**, then route  |
+| # | If the situation is…                    | Load                              |
+|---|-----------------------------------------|-----------------------------------|
+| 1 | new project, requirements known         | `scenarios/new-project.md`        |
+| 2 | existing codebase, little/no AI tooling | `scenarios/brownfield-adopt.md`   |
+| 3 | existing AI tooling, unsatisfied        | `scenarios/brownfield-optimize.md`|
+| 4 | quick / throwaway / one-off             | `scenarios/quick-oneoff.md`       |
+| — | unsure                                  | ask interview **Q0**, then route  |
+
+> These numbers are the canonical scenario IDs used throughout the references
+> ("scenario 2", "(4)", …): 1=new-project, 2=brownfield-adopt,
+> 3=brownfield-optimize, 4=quick-oneoff.
 
 Detection signals, in priority order:
 1. **Explicit user statement** ("new project", "已经在用 Cursor 但不满意", "just a quick script").
-2. **Repo inspection** — empty repo ⇒ *new*; existing code with **no** AI
-   fingerprints (`AGENTS.md`, `.cursor/rules`, `CLAUDE.md`, `.claude/`,
-   `openspec/`, `.kiro/`, `specs/`, a `SKILL.md`) ⇒ *adopt*; **with** fingerprints
-   ⇒ *optimize*.
+2. **Repo inspection** — empty repo ⇒ *new*. Existing code:
+   - no AI tooling, or only **light base-standard files** (`AGENTS.md`,
+     `CLAUDE.md`, `.cursor/rules`) ⇒ *adopt* — they've barely started; add to it.
+   - **heavier AI tooling** (`.claude/` skills+hooks, `openspec/`, `.kiro/specs/`,
+     installed skill packs, MCP servers) ⇒ *optimize*.
+   Tie-breaker = the user's satisfaction: unhappy with their setup ⇒ *optimize*;
+   "want to add X" ⇒ *adopt*.
 3. **Scope cue** ("one-off / throwaway / spike / 临时") ⇒ *quick*, regardless of repo age.
 4. **Fallback** ⇒ ask Q0.
 
 ## Hard rules (every scenario)
 - Recommend the **smallest** stack that solves the problem; justify every added layer.
-- **At most one tool per layer** by default; a second in the same layer needs an explicit reason in the plan.
+- **At most one tool per layer** by default; a second in the same layer needs an explicit reason in the plan. *Exception*: passive `base-standard` convention files (AGENTS.md, CLAUDE.md, `.cursor/rules`) may coexist or be consolidated — the cap targets active methodologies/harnesses, not instruction files.
 - Never co-recommend tools that conflict (check `conflicts_with` / `references/anti-patterns.md`).
 - Whenever a spec layer is on, include a **drift-control** step.
 - Never push a methodology onto a throwaway task.

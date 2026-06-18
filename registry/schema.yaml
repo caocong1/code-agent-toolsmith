@@ -27,7 +27,7 @@ fields:
     type: enum
     required: true
     values: [base-standard, spec, skill, orchestration, ide-platform, directory]
-    desc: "Primary taxonomy bucket (see PLAN.md §3)"
+    desc: "Primary taxonomy bucket (see references/taxonomy.md)"
 
   tags:
     type: list<string>
