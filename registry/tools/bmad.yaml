@@ -69,6 +69,9 @@ profile:
     - openspec
     - spec-kit
     - kiro
+    - taskmaster
+    - codestable
+    - comet
   best_fit: "Team building a complex, long-lived system that needs auditable agile rigor."
   anti_fit: "Solo dev, rapid prototype, or a one-off fix."
   provenance:

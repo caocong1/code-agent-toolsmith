@@ -72,6 +72,7 @@ profile:
     - trellis
     - ccw
     - gstack
+    - omc
   best_fit: "Long, multi-phase, spec-heavy task where context rot is the main pain."
   anti_fit: "Trivial fixes or single-file edits where subagent overhead isn't justified."
   provenance:

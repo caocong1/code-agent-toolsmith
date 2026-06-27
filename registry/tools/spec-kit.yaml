@@ -66,6 +66,9 @@ profile:
     - openspec
     - bmad
     - kiro
+    - taskmaster
+    - codestable
+    - comet
   best_fit: "New, long-lived project that can afford fuller SDD ceremony for maintainability."
   anti_fit: "Quick one-offs, or brownfield slices where heavy specs add friction."
   provenance:

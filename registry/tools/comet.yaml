@@ -1,0 +1,104 @@
+# Comet — registry entry. Verified 2026-06-26 (see provenance).
+
+id: comet
+name: Comet
+aliases:
+  - "@rpamis/comet"
+  - "rpamis/comet"
+
+primary_category: spec
+tags:
+  - openspec
+  - superpowers
+  - skill
+  - cli
+  - phase-guard
+  - state-machine
+  - multi-platform
+
+summary: "Phase-guarded Agent Skill harness that chains OpenSpec and Superpowers into a resumable five-phase idea-to-archive workflow."
+
+source:
+  repo: "https://github.com/rpamis/comet"
+  homepage: "https://github.com/rpamis/comet"
+
+version:
+  kind: release
+  ref: "0.3.9"
+  released_at: "2026-06-18"
+
+verified_at: "2026-06-26"
+
+status: active
+
+ecosystem:
+  - claude-code
+  - cursor
+  - codex
+  - opencode
+  - windsurf
+  - cline
+  - roo-code
+  - copilot
+  - gemini-cli
+  - amazon-q
+  - qwen-code
+  - kiro
+  - kimi-code
+  - antigravity
+
+first_seen: "0.4.0"
+last_changed: "0.4.0"
+
+notes: >-
+  MIT. Requires Node 20+, npm/npx, Git, and a Bash-compatible shell. Comet can
+  optionally install or update OpenSpec, Superpowers, and CodeGraph; it also
+  deploys skills, rules, hooks, scripts, .comet state/config files, OpenSpec
+  changes, and docs/superpowers artifacts. Although it uses OpenSpec and
+  Superpowers internally, treat Comet itself as the active spec/workflow
+  authority when recommending a stack.
+
+profile:
+  problem_solved: "Using OpenSpec and Superpowers together can drift and lose phase state; Comet links their artifacts with a guarded, resumable state machine."
+  strengths:
+    - "Five-phase workflow from open/design/build/verify/archive with automatic phase detection and resume"
+    - "Script-backed guards validate state, evidence, handoff hashes, archive conditions, and YAML shape"
+    - "Broad installer supports many AI coding platforms with project/global scope and English/Chinese skills"
+  weaknesses:
+    - "Heavy stack: OpenSpec + Superpowers + Comet scripts/state/hooks is too much for simple work"
+    - "Setup requires Node 20+, npm/npx, Git, and Bash-compatible shell"
+    - "Depends on underlying third-party skills and optional CLIs, increasing audit and supply-chain surface"
+  token_cost_profile: high
+  learning_curve: high
+  setup_complexity: high
+  maturity: emerging
+  team_fit: both
+  project_fit: both
+  autonomy_level: supervised
+  multi_model: false
+  security_signals:
+    - "Installs third-party skills/rules/hooks/scripts across selected AI coding platforms — audit before use"
+    - "Phase hooks can block writes during workflow phases; review hook scope and platform config"
+    - "Build/verify commands and optional npm dependencies expand the supply-chain and command-execution surface"
+  plays_well_with:
+    - agents-md
+    - superpowers
+  conflicts_with:
+    - openspec
+    - spec-kit
+    - bmad
+    - kiro
+    - taskmaster
+    - codestable
+  best_fit: "Long-running OpenSpec/Superpowers-style work where resumability, phase guards, artifact sync, and archive automation matter more than minimal setup."
+  anti_fit: "Quick one-offs, first-pass brownfield adoption, or teams unwilling to install workflow scripts/hooks and accept Comet as the spec authority."
+  provenance:
+    - "https://github.com/rpamis/comet/releases/tag/0.3.9"
+    - "https://github.com/rpamis/comet/tree/0.3.9"
+    - "https://github.com/rpamis/comet/blob/0.3.9/README.md"
+    - "https://github.com/rpamis/comet/blob/0.3.9/NEWS.md"
+    - "https://github.com/rpamis/comet/blob/0.3.9/package.json"
+    - "https://github.com/rpamis/comet/blob/0.3.9/LICENSE"
+    - "https://github.com/rpamis/comet/blob/0.3.9/docs/AUTO-TRANSITION.md"
+    - "https://github.com/rpamis/comet/blob/0.3.9/docs/CONTEXT-COMPRESSION.md"
+  profile_verified_at: "2026-06-26"

@@ -69,6 +69,7 @@ profile:
     - gsd
     - ccw
     - gstack
+    - omc
   best_fit: "Multi-CLI team or long-running project that needs context to survive across sessions."
   anti_fit: "A single quick task, or an org that can't take an AGPL dependency."
   provenance:

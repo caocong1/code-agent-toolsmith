@@ -1,0 +1,91 @@
+# CodeStable — registry entry. Verified 2026-06-26 (see provenance).
+# No GitHub releases/tags observed; pinned to the main-branch commit below.
+
+id: codestable
+name: CodeStable
+aliases:
+  - "liuzhengdongfortest/CodeStable"
+  - "cs"
+  - "cs-* skills"
+
+primary_category: spec
+tags:
+  - lifecycle
+  - skill
+  - human-in-the-loop
+  - requirements
+  - adr
+  - beta
+
+summary: "Human-in-the-loop software lifecycle workflow that stores requirements, roadmaps, features, issues, refactors, and retained knowledge under .codestable/."
+
+source:
+  repo: "https://github.com/liuzhengdongfortest/CodeStable"
+  homepage: "https://github.com/liuzhengdongfortest/CodeStable"
+
+version:
+  kind: commit
+  ref: "74f1aa3dee789b3c803f81c8cd34e2a95a40f4c8"
+  released_at: "2026-06-25"
+
+verified_at: "2026-06-26"
+
+status: active
+
+ecosystem:
+  - claude-code
+  - codex
+
+first_seen: "0.4.0"
+last_changed: "0.4.0"
+
+notes: >-
+  Beta. The canonical repo was identifiable, but no GitHub releases or tags
+  were observed, so this entry pins a commit rather than inventing a version.
+  Installs a family of cs-* skills via the skills CLI and creates/uses a
+  .codestable/ project tree as the workflow authority. The README still shows
+  the older codestable/ spelling in places, while cs-onboard documents migration
+  from easysdd/codestable to .codestable and says child skills only read
+  .codestable/. README states MIT, but no standalone LICENSE file was present at
+  the pinned commit; verify licensing before redistribution.
+
+profile:
+  problem_solved: "Long-lived AI-assisted projects lose requirements, decisions, feature state, issue history, and lessons; CodeStable keeps those software elements in a durable .codestable/ tree."
+  strengths:
+    - "Models the software lifecycle directly: requirements, ADRs, roadmaps, features, issues, refactors, and retained knowledge"
+    - "Human-in-the-loop by design, with explicit routing and acceptance flows instead of full-auto agent orchestration"
+    - "Plain-file project state under .codestable/ keeps artifacts readable by humans and agents"
+  weaknesses:
+    - "Beta project with no formal release/tag stream; registry must pin commits"
+    - "Requires adopting a broad cs-* skill family and a .codestable/ artifact tree"
+    - "README license claim is not backed by a standalone LICENSE file at the pinned commit"
+  token_cost_profile: medium
+  learning_curve: medium
+  setup_complexity: medium
+  maturity: emerging
+  team_fit: both
+  project_fit: both
+  autonomy_level: supervised
+  multi_model: false
+  security_signals:
+    - "Third-party skill pack — audit installed cs-* skills before broad use"
+    - "No formal releases/tags observed; pin and review a commit before adoption"
+    - "README states MIT but no standalone LICENSE file was present at the pinned commit"
+  plays_well_with:
+    - agents-md
+  conflicts_with:
+    - openspec
+    - spec-kit
+    - bmad
+    - kiro
+    - taskmaster
+    - comet
+  best_fit: "Serious, long-lived software where humans want durable requirements, design decisions, feature/issue history, and knowledge reuse around the coding agent."
+  anti_fit: "Quick one-offs, throwaway prototypes, or teams seeking mostly autonomous multi-agent execution."
+  provenance:
+    - "https://github.com/liuzhengdongfortest/CodeStable/tree/74f1aa3dee789b3c803f81c8cd34e2a95a40f4c8"
+    - "https://github.com/liuzhengdongfortest/CodeStable/blob/74f1aa3dee789b3c803f81c8cd34e2a95a40f4c8/README.en.md"
+    - "https://github.com/liuzhengdongfortest/CodeStable/blob/74f1aa3dee789b3c803f81c8cd34e2a95a40f4c8/cs/SKILL.md"
+    - "https://github.com/liuzhengdongfortest/CodeStable/releases"
+    - "https://github.com/liuzhengdongfortest/CodeStable/tags"
+  profile_verified_at: "2026-06-26"

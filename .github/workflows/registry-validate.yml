@@ -2,7 +2,8 @@ name: registry-validate
 
 # Gate every change to the knowledge base with the same checks the self-update
 # pipeline uses: schema conformance + verified_at discipline + conflicts_with
-# symmetry + reference integrity. See pipeline/validate.py.
+# symmetry + reference integrity, plus README index sync.
+# See pipeline/validate.py and pipeline/render_readme.py.
 
 on:
   push:
@@ -20,3 +21,5 @@ jobs:
         run: pip install pyyaml jsonschema
       - name: Validate registry against schema.json
         run: python3 pipeline/validate.py
+      - name: Check README Tooling Index sync
+        run: python3 pipeline/render_readme.py --check

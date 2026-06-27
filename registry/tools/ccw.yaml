@@ -68,6 +68,7 @@ profile:
     - gsd
     - trellis
     - gstack
+    - omc
   best_fit: "Team wanting repeatable, auditable multi-model sprint workflows."
   anti_fit: "Simple tasks, single-model users, or anyone averse to workflow-as-code."
   provenance:

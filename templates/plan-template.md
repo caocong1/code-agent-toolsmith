@@ -1,8 +1,9 @@
 # 方案 / Adoption Plan — <project or task name>
 
-> Fill every section. Mark inferred values with *(inferred)* and unknowns with
-> *(unverified)*. Write in the user's language (default 中文). Keep tool names
-> and version refs verbatim. Do not invent commands — link to each tool's docs.
+> Fill every section unless the routed scenario says to omit/shrink one. Mark
+> inferred values with *(inferred)* and unknowns with *(unverified)*. Write in
+> the user's language (default 中文). Keep tool names and version refs verbatim.
+> Do not invent commands — link to each tool's docs.
 
 ## 0. 概况 / Situation (as understood)
 - **Scenario / 场景**: <1–4 + label>

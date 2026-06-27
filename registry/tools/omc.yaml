@@ -1,0 +1,98 @@
+# oh-my-claudecode (OMC) — registry entry. Verified 2026-06-26 (see provenance).
+
+id: omc
+name: oh-my-claudecode (OMC)
+aliases:
+  - "OMC"
+  - "oh-my-claudecode"
+  - "Yeachan-Heo/oh-my-claudecode"
+  - "oh-my-claude-sisyphus"
+  - "oh-my-claude-code"
+
+primary_category: orchestration
+tags:
+  - claude-code
+  - hooks
+  - slash-commands
+  - agents
+  - team-mode
+  - tmux
+  - multi-model
+  - cli
+
+summary: "Claude Code orchestration framework with plugin/CLI install, Team pipelines, autopilot flows, hooks, skills, agents, and tmux workers for peer CLIs."
+
+source:
+  repo: "https://github.com/Yeachan-Heo/oh-my-claudecode"
+  homepage: "https://yeachan-heo.github.io/oh-my-claudecode/"
+
+version:
+  kind: release
+  ref: "v4.15.0"
+  released_at: "2026-06-23"
+
+verified_at: "2026-06-26"
+
+status: active
+
+ecosystem:
+  - claude-code
+  - codex
+  - gemini-cli
+  - cursor
+  - antigravity
+
+first_seen: "0.4.0"
+last_changed: "0.4.0"
+
+notes: >-
+  MIT. IDENTITY CONFIRMED: the canonical repo, plugin, and commands are branded
+  oh-my-claudecode under Yeachan-Heo/oh-my-claudecode. The npm package remains
+  oh-my-claude-sisyphus and installs the oh-my-claudecode / omc command aliases;
+  do not treat the spaced or hyphenated oh-my-claude-code variant as a separate
+  canonical project. OMC includes a /ccg-style skill, but CCG stays recorded in
+  this registry as an unverified pattern rather than a separate canonical tool.
+
+profile:
+  problem_solved: "Claude Code orchestration can sprawl across commands, agents, hooks, and external CLIs; OMC provides one plugin/CLI surface for team pipelines and persistent execution."
+  strengths:
+    - "Team is documented as the canonical staged orchestration surface with plan, PRD, execution, verification, and fix phases"
+    - "Supports Claude Code plugin install plus npm CLI/runtime install, with omc command aliases"
+    - "tmux team workers can spawn Codex, Gemini, Antigravity, Grok, Cursor, and Claude CLI panes for bounded peer-CLI work"
+  weaknesses:
+    - "Claude-Code-first framework; poor fit for teams not using Claude Code as the coordinator"
+    - "Large command/agent/hook/runtime surface has high audit and onboarding overhead"
+    - "npm package name differs from repo/plugin brand, which can confuse install and update paths"
+  token_cost_profile: high
+  learning_curve: high
+  setup_complexity: high
+  maturity: established
+  team_fit: both
+  project_fit: both
+  autonomy_level: supervised
+  multi_model: true
+  security_signals:
+    - "Installs third-party commands, hooks, skills, agents, templates, MCP config, and scripts — audit before use"
+    - "tmux team workers launch external CLIs such as codex, gemini, cursor-agent, and claude; scope credentials and tool permissions"
+    - "Persistent/autopilot flows can continue until verification; use branch, time, token, and test gates"
+    - "CI/headless use should prefer deterministic terminal commands with explicit API keys in runner env"
+  plays_well_with:
+    - agents-md
+  conflicts_with:
+    - ecc
+    - superclaude
+    - ralph
+    - gsd
+    - trellis
+    - ccw
+    - gstack
+  best_fit: "Claude Code power user or team that wants an all-in-one orchestration surface with staged team execution and optional peer-CLI workers."
+  anti_fit: "Quick one-offs, minimal setups, or teams that want model-agnostic orchestration without adopting a large Claude Code plugin/runtime."
+  provenance:
+    - "https://github.com/Yeachan-Heo/oh-my-claudecode/releases/tag/v4.15.0"
+    - "https://github.com/Yeachan-Heo/oh-my-claudecode/tree/v4.15.0"
+    - "https://github.com/Yeachan-Heo/oh-my-claudecode/blob/v4.15.0/README.md"
+    - "https://github.com/Yeachan-Heo/oh-my-claudecode/blob/v4.15.0/package.json"
+    - "https://github.com/Yeachan-Heo/oh-my-claudecode/blob/v4.15.0/LICENSE"
+    - "https://yeachan-heo.github.io/oh-my-claudecode/"
+  profile_verified_at: "2026-06-26"

@@ -68,6 +68,9 @@ profile:
     - openspec
     - spec-kit
     - bmad
+    - taskmaster
+    - codestable
+    - comet
   best_fit: "AWS-committed team that wants spec-driven rigor inside a managed IDE."
   anti_fit: "Non-AWS shops, cost-sensitive or open-source-first teams, or anyone wanting to stay in their current agent."
   provenance:

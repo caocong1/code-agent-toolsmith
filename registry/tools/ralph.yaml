@@ -70,6 +70,7 @@ profile:
     - trellis
     - ccw
     - gstack
+    - omc
   best_fit: "Greenfield, well-specified, time-boxed task with strong tests and an isolated branch."
   anti_fit: "Brownfield, weak/no tests, security-critical work, or any no-review-allowed context."
   provenance:

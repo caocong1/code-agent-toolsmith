@@ -40,7 +40,7 @@
 
 参考已有的生态分析，划分为「基础标准层 + 五大类」。允许一个工具有 1 个 `primary_category` 和多个 `tags`（因为有些工具跨层，例如 Kiro 既是 Spec 又是 IDE，gstack 既是编排又是角色团队）。
 
-| code（primary_category） | 中文        | 说明                                   | 典型工具（待入库）                                   |
+| code（primary_category） | 中文        | 说明                                   | 典型工具                                             |
 |--------------------------|-------------|----------------------------------------|----------------------------------------------------|
 | `base-standard`          | 基础标准层  | 给 agent 的长期说明书 / 格式规范        | AGENTS.md, Agent Skills (SKILL.md), Cursor Rules   |
 | `spec`                   | 规格/SDD 层 | 写代码前先对齐需求/设计/任务           | OpenSpec, Spec Kit, Kiro, BMAD, Agent OS, Taskmaster, CodeStable, Comet |
@@ -122,6 +122,20 @@
 - **Removed** — 工具消失/停更（`status: removed` + `removed_at`）。**条目保留不物理删除**，便于追溯历史。
 
 > 原则：工具「消失」不等于「删文件」。把 `status` 置为 `removed` 并保留条目，是为了让历史快照仍然自洽、可追溯。
+>
+> `pipeline/diff_snapshot.py` 可离线比较上一份 release snapshot 与当前
+> `registry/tools/*.yaml` 投影（或显式 `--from/--to` 两份 snapshot），生成
+> Added / Changed / Deprecated / Removed 草稿；maintainer 审阅后再写入
+> `CHANGELOG.md`。
+>
+> `pipeline/summarize_candidates.py` 可离线读取同一批 registry 条目，按 scenario
+> 输出 advisor 使用的候选短表（版本状态、profile 成本、fit、风险、安全信号与冲突图）。
+> 它只辅助比较，不替代 `SKILL.md` / `scenarios/` / rubric 的最终推荐判断。
+>
+> `pipeline/validate_advisor_contract.py` 读取
+> `scenarios/fixtures/advisor-contract.yaml`，把 advisor 的四个核心场景、
+> quick-oneoff 约束、spec drift-control、每层一个 active tool、方案模板骨架和
+> candidate summary 非空要求变成离线回归检查；它不调用真实 LLM。
 
 ---
 
@@ -130,38 +144,70 @@
 ```
 .
 ├── SKILL.md                 # skill manifest（带 version，本 skill 的身份与版本）
+├── agents/
+│   └── openai.yaml          # UI-facing skill metadata
 ├── PLAN.md                  # 本规划文件
 ├── CHANGELOG.md             # skill 各版本 + 工具版本变化记录
-├── README.md                # 给人看的索引（指向 registry；后续可由脚本生成）
+├── README.md                # 给人看的索引（Tooling Index 由 registry 自动生成）
+├── pipeline/                # registry 校验、README 渲染、快照、候选摘要、self-update playbook
+├── scenarios/
+│   └── fixtures/
+│       └── advisor-contract.yaml  # advisor contract forward-test fixtures
 ├── registry/
 │   ├── schema.yaml          # 条目字段规范（带注释）
+│   ├── schema.json          # 机器可校验 mirror
 │   └── tools/
-│       ├── openspec.yaml    # ✅ Step 1 提供的 1 个样例条目
-│       └── <id>.yaml        # 其余工具（Step 2 批量建立）
+│       └── <id>.yaml        # 每个工具一个条目，registry 的 source of truth
 └── snapshots/               # 每个 skill 版本的工具版本快照（Step 2 起）
-    └── v0.1.0.yaml          # （Step 2 生成第一个完整快照）
+    ├── v0.3.0.yaml          # 旧版发布快照（13 tools）
+    └── v0.4.0.yaml          # 当前已发布快照（19 tools）
 ```
 
 ---
 
-## 8. 路线图（Roadmap）
+## 8. 当前状态与路线图（Roadmap）
 
-| 步骤 | 内容 | 产出 |
-|------|------|------|
-| **Step 1（本次）** | 规划 + 结构 + schema + 1 个样例 + CHANGELOG 起点 | 本 PR：`PLAN.md` `SKILL.md` `registry/schema.yaml` `registry/tools/openspec.yaml` `CHANGELOG.md` + README 修正 |
-| **Step 2** | 逐个工具建条目；用 WebSearch/WebFetch **核实真实版本**；生成第一份完整快照 | `registry/tools/*.yaml`（全量）、`snapshots/v0.2.0.yaml` |
-| **Step 3** | JSON Schema 校验 + README 自动生成脚本 + CI（PR 时校验/重生成） | `scripts/`、CI 配置 |
-| **Step 4（可选）** | 安全信号标注、路由/推荐、订阅上游 release 自动提醒 | 增强能力 |
+| 阶段 | 状态 | 已有产出 | 还缺什么 |
+|------|------|----------|----------|
+| **v0.1.0 registry skeleton** | ✅ Done | `PLAN.md`、`registry/schema.yaml`、`openspec` 样例、`CHANGELOG.md` | — |
+| **v0.2.0 advisor skeleton** | ✅ Done | `SKILL.md` 推荐工作流、`scenarios/`、`references/`、`templates/plan-template.md` | — |
+| **v0.3.0 profiled registry** | ✅ Done | 13 个 profiled 工具条目、`schema.json`、`validate.py`、`snapshot.py`、`snapshots/v0.3.0.yaml` | — |
+| **Phase 3 foundation** | ✅ Done | `research-playbook.md`、`sources.yaml`、CI validation、`agents/openai.yaml`、`pipeline/render_readme.py`、`pipeline/diff_snapshot.py`、`pipeline/summarize_candidates.py`、`pipeline/validate_advisor_contract.py` | 可选 scheduled runner / future discovery refresh |
+| **v0.4.0 candidate expansion** | ✅ Done | Taskmaster、SuperClaude、CodeStable、Comet、ECC、OMC 已入库；`snapshots/v0.4.0.yaml` 冻结 19 个工具 | — |
+| **Future advisor reliability** | Planned | v0.4.0 已包含 `pipeline/summarize_candidates.py`、`scenarios/fixtures/advisor-contract.yaml`、`pipeline/validate_advisor_contract.py` | 扩展更多真实输出样例 / UAT，让最终 方案 更稳定、更可测试 |
 
 ---
 
-## 9. 待确认的设计选择（Open decisions）
+## 9. 还缺什么（Open work）
 
-以下都已给出推荐默认值，可在 review 本 PR 时推翻：
+1. **advisor contract fixtures 已有初版**：`pipeline/summarize_candidates.py`
+   已可按 scenario/layer 输出候选短表与冲突图；
+   `pipeline/validate_advisor_contract.py` 已把 4 个核心场景的路由与硬规则做成
+   离线回归检查。下一步可在真实使用后补充更多 UAT 样例。
+2. **v0.4.0 candidate batch 已清空并冻结**：Taskmaster、SuperClaude、
+   CodeStable、Comet、ECC、OMC 都已在 v0.4.0 入库；当前 batch 不再保留待处理项。
+3. **future discovery refresh**：当前发布快照是 `snapshots/v0.4.0.yaml`
+   （19 tools，生成日期 `2026-06-26`）。后续发版前应跑 `research-playbook.md`
+   做 freshness check，不能把旧快照说成未来日期的最新状态。
+4. **optional unattended scheduled runner 尚未接入**：这依赖带 web + model API secrets 的
+   runner。接入前保持 manual / draft PR 流程；接入后也只开 human-reviewable PR，
+   不自动合并。
 
-1. **源数据格式**：YAML（**推荐**，可读、可注释）vs JSON vs 纯 Markdown。
-2. **每工具一文件**（**推荐**，diff 清晰）vs 单一 `registry/tools.yaml`。
-3. **快照存放**：独立 `snapshots/*.yaml`（**推荐**，可机器对比）vs 仅写进 CHANGELOG。
-4. **版本核实策略（Step 2）**：以各 repo 的 **latest release/tag** 为准；无 release 的取最新 commit + 日期。
+## 10. 已定设计（Accepted decisions）
 
-如果以上默认 OK，Step 2 直接按此批量建条目并核实版本。
+1. **源数据格式**：YAML 为 source of truth，JSON Schema 为机器校验 mirror。
+2. **每工具一文件**：`registry/tools/<id>.yaml`，便于 diff 新增/删除/变更。
+3. **快照存放**：`snapshots/v<skill-version>.yaml`，每次 release 冻结全量版本。
+4. **版本核实策略**：优先 release/tag；无正式版本时用 rolling/commit/date/none，
+   并严格遵守 `verified_at` 不猜测。
+5. **README Tooling Index**：由 `pipeline/render_readme.py` 从
+   `registry/tools/*.yaml` 生成；CI 用 `--check` 防止 README 与 registry 分叉。
+6. **CHANGELOG 草稿**：由 `pipeline/diff_snapshot.py` 离线比较上一份 release
+   snapshot 与当前 registry 投影；结果是 maintainer 审阅用草稿，不自动改
+   `CHANGELOG.md`。
+7. **Advisor 候选摘要**：由 `pipeline/summarize_candidates.py` 离线读取
+   `registry/tools/*.yaml` 并按 scenario/layer 投影候选；它是分析输入，不是
+   最终推荐引擎。
+8. **Advisor contract fixtures**：由 `scenarios/fixtures/advisor-contract.yaml`
+   记录四个核心场景的期望路由、默认层、排除项、drift-control 和方案骨架；
+   `pipeline/validate_advisor_contract.py` 离线校验这些约束，不调用 LLM。

@@ -10,12 +10,12 @@ description: >-
   Kit, BMAD, Superpowers, GSD, Trellis, CCW, Agent OS, or comparing coding-agent
   setups.
 license: MIT
-compatibility: >-
-  Model-agnostic; runs inside any agent that supports Agent Skills (Claude Code,
-  etc.). Reads local registry YAML and reference files. Requires no network and
-  no strong-model calls.
 metadata:
-  version: "0.3.0"
+  version: "0.4.0"
+  compatibility: >-
+    Model-agnostic; runs inside any agent that supports Agent Skills (Claude Code,
+    etc.). Reads local registry YAML and reference files. Requires no network and
+    no strong-model calls.
   source_of_truth: registry/tools/
   schema: registry/schema.yaml
   schema_json: registry/schema.json
@@ -54,6 +54,9 @@ models — you read local knowledge, reason, and produce a written plan.
    gaps. → `references/interview.md`
 2. **Candidate analysis** — map situation → layers → candidate tools. →
    `references/taxonomy.md`, `registry/tools/`
+   Optional: when candidates are many, run
+   `python3 pipeline/summarize_candidates.py --scenario <id-or-name>` for a
+   scenario/layer candidate summary before applying the rubric.
 3. **Recommend + WHY** — apply the rubric; pick the smallest stack that solves
    it; name what you excluded. → `references/decision-framework.md`, `references/stacks.md`
 4. **Emit the 方案** — fill the template. → `templates/plan-template.md`
@@ -102,6 +105,12 @@ Detection signals, in priority order:
   If a tool has no entry or empty fields, **degrade gracefully**: treat unknowns
   conservatively (e.g. unknown token cost ⇒ assume medium and say so) and mark
   them "unverified" in the plan.
+- **Candidate summary helper**: before writing the final 方案, or whenever the
+  candidate set is broad, run
+  `python3 pipeline/summarize_candidates.py --scenario <id-or-name>` to get a
+  Markdown short list with version status, profile fields, security signals, and
+  relationship/conflict notes. Treat it as advisor input only — the final
+  decision still comes from the rubric and the routed scenario file.
 
 ## References (one level deep)
 - Interview & inference → `references/interview.md`

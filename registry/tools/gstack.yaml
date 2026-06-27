@@ -68,6 +68,7 @@ profile:
     - gsd
     - trellis
     - ccw
+    - omc
   best_fit: "Solo founder or small team wanting enforced review/governance gates."
   anti_fit: "Teams wanting low process overhead, or anyone needing strict semantic versioning."
   provenance:

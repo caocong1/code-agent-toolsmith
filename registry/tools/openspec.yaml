@@ -68,6 +68,9 @@ profile:
     - spec-kit
     - bmad
     - kiro
+    - taskmaster
+    - codestable
+    - comet
   best_fit: "Brownfield codebase that needs maintainability + low token cost without heavy ceremony."
   anti_fit: "Pure throwaway scripts, or teams with zero intention of maintaining specs."
   provenance:

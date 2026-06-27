@@ -26,15 +26,11 @@ github_search_queries:
   - "AGENTS.md OR CLAUDE.md tooling"
   - "coding agent skills methodology TDD"
 
-# Named-but-not-yet-profiled tools observed in references/taxonomy.md.
-# The loop should research and either profile these or mark them UNVERIFIED.
-backlog_candidates:
-  - taskmaster
-  - codestable
-  - comet
-  - ecc            # "Everything Claude Code" — verify identity
-  - omc            # oh-my-claudecode (yeachan-heo) — verify
-  - superclaude
+# Backlog seed list for future discovery refreshes.
+# The loop should research any future entries and either profile them or mark them UNVERIFIED.
+# Profiled and frozen in the v0.4.0 candidate expansion:
+# taskmaster, superclaude, codestable, comet, ecc, omc.
+backlog_candidates: []
 
 # Primary-source patterns the research stage prefers over search snippets.
 version_sources:

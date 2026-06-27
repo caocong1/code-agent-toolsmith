@@ -63,7 +63,9 @@ profile:
   plays_well_with:
     - agents-md
     - openspec
-  conflicts_with: []
+  conflicts_with:
+    - superclaude
+    - ecc
   best_fit: "Solo dev or team wanting enforced TDD/planning/review discipline inside their agent."
   anti_fit: "Throwaway tasks, or anyone wanting minimal ceremony."
   provenance:

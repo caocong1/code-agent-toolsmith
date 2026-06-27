@@ -11,11 +11,10 @@ Code, etc.). The recommendation side needs no network and no extra model; strong
 models are used only in the offline self-update pipeline that keeps the tool
 knowledge fresh.
 
-> **Status**: v0.3.0 — advisor skeleton (Phase 1) + populated, profiled knowledge
-> base (Phase 2). 13 tools carry web-verified versions and decision profiles
-> (`profile:`), checked by `pipeline/validate.py` and frozen in
-> `snapshots/v0.3.0.yaml`. The fully-automated self-update pipeline lands in
-> Phase 3 (see [`PLAN.md`](PLAN.md) and the plan history).
+> **Status**: v0.4.0 — advisor skeleton + populated, profiled knowledge base,
+> now frozen with the v0.4.0 candidate expansion. 19 tools are pinned in
+> [`snapshots/v0.4.0.yaml`](snapshots/v0.4.0.yaml), including Taskmaster,
+> SuperClaude, CodeStable, Comet, ECC, and OMC.
 
 ## What it does — 4 scenarios
 
@@ -32,35 +31,43 @@ knowledge fresh.
 
 ## Tooling Index (knowledge base, human view)
 
-Categories use the layer taxonomy: `base-standard · spec · skill · orchestration · ide-platform · directory`.
-This table mirrors `registry/tools/*.yaml`; versions were web-verified on 2026-06-18 (see each entry's `provenance`).
+<!-- tooling-index:start -->
+
+Categories use the layer taxonomy: `base-standard`, `spec`, `skill`, `orchestration`, `ide-platform`, `directory`.
+This table is generated from `registry/tools/*.yaml`; edit registry entries, then run `python3 pipeline/render_readme.py`.
+Verified registry entries have per-entry `verified_at` dates in `registry/tools/*.yaml`; unverified entries are marked.
 
 | Name | Layer | Version | One-liner |
 |---|---|---|---|
-| **AGENTS.md** | base-standard | rolling | Open instruction-file standard; the near-universal base layer. |
-| **OpenSpec** | spec | v1.4.1 | Lightweight in-repo spec layer to align humans & AI before code. |
-| **Spec Kit** | spec | 0.11.1 | GitHub's spec→plan→tasks→implement SDD toolkit. |
-| **BMAD-METHOD** | spec | v6.8.0 | Agile SDD with PM/Architect/Dev/QA agent roles. |
-| **Agent OS** | spec | v3.0.0 | Discovers & injects a codebase's standards into agents. |
-| **Kiro** | ide-platform | GA · 2025-11-17 | AWS agentic IDE with a built-in spec-driven flow (proprietary). |
-| **Superpowers** | skill | v6.0.2 | Composable TDD/plan/review methodology skills. |
-| **GSD** | orchestration | v1.5.0 | Fresh-context subagents (Discuss→Ship) for long tasks. |
-| **Trellis** | orchestration | v0.5.15 | Repo-persistent specs/tasks/memory; cross-CLI (AGPL-3.0). |
-| **CCW** | orchestration | v7.3.14 | JSON workflow-as-code multi-model orchestration. |
-| **gstack** | orchestration | rolling | Role-team (CEO/QA/security/release) review layer. |
-| **Ralph** | orchestration | technique | ⚠ Full-auto loop; fresh context each iteration (high-risk). |
-| **CCG** | orchestration | _unverified_ | Multi-model review **pattern** — no canonical tool; audit a specific impl. |
+| **AGENTS.md** | base-standard | rolling | An open, Markdown instruction-file standard that gives coding agents project-specific context — the near-universal base layer. |
+| **Agent OS** | spec | v3.0.0 | Lightweight standards layer that discovers, documents, and injects a codebase's conventions into AI agents so output matches team practice. |
+| **BMAD-METHOD** | spec | v6.8.0 | Agile SDD framework that casts AI agents as roles (PM/Architect/Dev/QA) driving a full PRD → architecture → stories → build lifecycle. |
+| **CodeStable** | spec | 74f1aa3dee789b3c803f81c8cd34e2a95a40f4c8 | Human-in-the-loop software lifecycle workflow that stores requirements, roadmaps, features, issues, refactors, and retained knowledge under .codestable/. |
+| **Comet** | spec | 0.3.9 | Phase-guarded Agent Skill harness that chains OpenSpec and Superpowers into a resumable five-phase idea-to-archive workflow. |
+| **OpenSpec** | spec | v1.4.1 | Lightweight spec layer — specs/ as current state, changes/ as proposals — to align humans and AI before coding. |
+| **Spec Kit** | spec | 0.11.1 | GitHub's spec-driven toolkit: a structured Spec → Plan → Tasks → Implement workflow that treats specifications as executable artifacts. |
+| **Taskmaster** | spec | task-master-ai@0.43.1 | AI task-management layer that turns a PRD into dependency-aware tasks/subtasks and exposes them through CLI/MCP for coding agents. |
+| **ECC** | skill | v2.0.0 | Cross-harness agent operating system that packages agents, skills, hooks, rules, MCP conventions, and operator workflows for Claude Code and peer CLIs. |
+| **SuperClaude Framework** | skill | v4.3.0 | Claude Code configuration framework that installs /sc commands, specialist agents, behavioral modes, and optional MCP integrations. |
+| **Superpowers** | skill | v6.0.2 | Composable Markdown skills that encode engineering discipline (brainstorm → plan → TDD → review) as reusable commands for AI agents. |
+| **CCG (multi-model review pattern)** | orchestration | _unverified_ | A cross-model review PATTERN (Claude orchestrates; Gemini/Codex assist + review) — multiple community implementations, no canonical tool. |
+| **Claude-Code-Workflow** | orchestration | v7.3.14 | JSON-driven multi-agent orchestration for Claude Code: declarative workflows, CLI routing, a skill registry, and terminal dashboards. |
+| **Get Shit Done (GSD)** | orchestration | v1.5.0 | Phase-based orchestration that spawns fresh-context subagents (Discuss → Plan → Execute → Verify → Ship) to fight context rot on long tasks. |
+| **gstack** | orchestration | rolling | Installs specialist personas (CEO/QA/Security/Release…) into Claude Code, enforcing review gates so a solo dev gets a virtual engineering team. |
+| **oh-my-claudecode (OMC)** | orchestration | v4.15.0 | Claude Code orchestration framework with plugin/CLI install, Team pipelines, autopilot flows, hooks, skills, agents, and tmux workers for peer CLIs. |
+| **Ralph (Ralph Wiggum loop)** | orchestration | technique (no formal version) | A full-auto technique: run a coding agent in a loop with fresh context each iteration, using files/git as memory, for hands-off multi-hour runs. |
+| **Trellis** | orchestration | v0.5.15 | Persists specs, tasks, and memory into the repo (.trellis/) so any agent resumes cross-session context and work ports across CLIs. |
+| **Kiro** | ide-platform | GA | AWS's agentic IDE that mandates a spec-driven workflow (requirements → design → tasks → code) with built-in property-based testing and checkpoints. |
 
-> Other tools named in `references/taxonomy.md` (Taskmaster, CodeStable, Comet,
-> ECC, OMC, SuperClaude) are **not yet profiled** — the advisor treats them as
-> "unverified" until a registry entry exists. Base-standard conventions beyond
-> AGENTS.md (CLAUDE.md, Cursor Rules) and directory-layer sources are described
-> in the taxonomy.
+<!-- tooling-index:end -->
+
+> Base-standard conventions beyond AGENTS.md (CLAUDE.md, Cursor Rules) and
+> directory-layer sources are described in the taxonomy.
 
 ## How to use this repo
 
 - **As an advisor**: invoke the skill in your agent and describe your situation; it routes to the right scenario, asks a few questions, and produces a 方案.
-- **As a maintainer**: add/update tools under `registry/tools/` per `registry/schema.yaml`; run `python3 pipeline/validate.py` (schema + `verified_at` discipline + conflict-graph symmetry + reference integrity) and regenerate the snapshot with `python3 pipeline/snapshot.py`; record changes in [`CHANGELOG.md`](CHANGELOG.md); never fabricate versions (mark "unverified" until checked).
+- **As a maintainer**: add/update tools under `registry/tools/` per `registry/schema.yaml`; run `python3 pipeline/validate.py` (schema + `verified_at` discipline + conflict-graph symmetry + reference integrity), `python3 pipeline/render_readme.py`, and `python3 pipeline/render_readme.py --check`; regenerate the snapshot with `python3 pipeline/snapshot.py`; record changes in [`CHANGELOG.md`](CHANGELOG.md); never fabricate versions (mark "unverified" until checked).
 
 ## License
 
