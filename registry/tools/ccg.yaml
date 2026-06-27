@@ -1,0 +1,75 @@
+# CCG — registry entry. IDENTITY UNVERIFIED as of 2026-06-18.
+# This is a multi-model-review PATTERN with several incompatible community
+# implementations, NOT a single canonical tool. Recorded honestly so the
+# advisor never presents it as a vetted product. See notes + provenance.
+
+id: ccg
+name: "CCG (multi-model review pattern)"
+aliases:
+  - "CCG"
+  - "Claude-Codex-Gemini"
+
+primary_category: orchestration
+tags:
+  - multi-model
+  - review
+  - pattern
+  - unverified
+
+summary: "A cross-model review PATTERN (Claude orchestrates; Gemini/Codex assist + review) — multiple community implementations, no canonical tool."
+
+source: {}
+
+version:
+  kind: none
+  ref: "TBD"
+  released_at: null
+
+verified_at: null
+
+status: unknown
+
+ecosystem:
+  - claude-code
+  - gemini-cli
+  - codex
+
+first_seen: "0.3.0"
+last_changed: "0.3.0"
+
+notes: >-
+  IDENTITY UNVERIFIED: no single canonical repo. Multiple incompatible
+  implementations exist (e.g. fengshao1227/ccg-workflow ~5.6k stars, MIT;
+  Z-M-Huang/claude-codex-gemini, GPL-3.0). Treat as a pattern, not a product.
+  If recommending, pin and audit the SPECIFIC implementation chosen. Very high
+  token cost (3+ models in parallel).
+
+profile:
+  problem_solved: "Single-model blind spots; route/review across Claude + Gemini + Codex and synthesize."
+  strengths:
+    - "Leverages multiple models' strengths; parallel execution"
+    - "Cross-model review can catch single-model errors"
+  weaknesses:
+    - "No canonical implementation — fragmented, incompatible variants"
+    - "Very high token cost and coordination overhead"
+    - "Security varies wildly by implementation"
+  token_cost_profile: high
+  learning_curve: medium
+  setup_complexity: high
+  maturity: experimental
+  team_fit: team
+  project_fit: both
+  autonomy_level: supervised
+  multi_model: true
+  security_signals:
+    - "UNVERIFIED pattern — audit the specific repo you adopt (no canonical owner)"
+    - "Runs 3+ models in parallel — restrict external models to patch-generation + review, gate before apply"
+  plays_well_with: []
+  conflicts_with: []
+  best_fit: "Risk-tolerant team with Claude+Gemini+Codex access wanting cross-model review — after vetting a specific implementation."
+  anti_fit: "Risk-averse or compliance-heavy teams; anyone wanting one canonical, supported tool."
+  provenance:
+    - "https://github.com/fengshao1227/ccg-workflow"
+    - "https://github.com/Z-M-Huang/claude-codex-gemini"
+    - "https://www.pulumi.com/blog/claude-code-orchestration-frameworks/"
+  profile_verified_at: "2026-06-18"

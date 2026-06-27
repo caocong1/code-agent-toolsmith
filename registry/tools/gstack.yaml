@@ -1,0 +1,77 @@
+# gstack — registry entry. Verified 2026-06-18 (see provenance).
+
+id: gstack
+name: gstack
+aliases:
+  - "Garry Tan's gstack"
+
+primary_category: orchestration
+tags:
+  - role-team
+  - review
+  - personas
+
+summary: "Installs specialist personas (CEO/QA/Security/Release…) into Claude Code, enforcing review gates so a solo dev gets a virtual engineering team."
+
+source:
+  repo: "https://github.com/garrytan/gstack"
+  homepage: "https://github.com/garrytan/gstack"
+
+version:
+  kind: rolling
+  ref: "rolling"
+  released_at: null
+
+verified_at: "2026-06-18"
+
+status: active
+
+ecosystem:
+  - claude-code
+  - codex
+
+first_seen: "0.3.0"
+last_changed: "0.3.0"
+
+notes: >-
+  MIT, by Garry Tan. Hugely popular but NO semantic versioning (rolling dev) —
+  pin a commit for reproducibility. Really a review-committee layer (not a
+  coding base on its own). Installs 20+ third-party skills — audit before install.
+
+profile:
+  problem_solved: "Solo/small teams lack review roles; gstack adds CEO/QA/Security/Release personas with mandatory gates before merge."
+  strengths:
+    - "Mandatory security/QA/review gates (OWASP/STRIDE-style prompts)"
+    - "Comprehensive role coverage; strong for process discipline"
+    - "Very large community"
+  weaknesses:
+    - "No semantic versioning (rolling) — reproducibility risk"
+    - "Many personas add context/token overhead"
+    - "Not a coding base on its own — a review/governance layer"
+  token_cost_profile: high
+  learning_curve: medium
+  setup_complexity: medium
+  maturity: emerging
+  team_fit: both
+  project_fit: both
+  autonomy_level: supervised
+  multi_model: true
+  security_signals:
+    - "Installs 20+ third-party skills/personas — audit before install"
+    - "No semantic versioning (rolling) — pin a commit for reproducibility"
+  plays_well_with:
+    - openspec
+    - spec-kit
+    - agents-md
+  conflicts_with:
+    - ralph
+    - gsd
+    - trellis
+    - ccw
+    - omc
+  best_fit: "Solo founder or small team wanting enforced review/governance gates."
+  anti_fit: "Teams wanting low process overhead, or anyone needing strict semantic versioning."
+  provenance:
+    - "https://github.com/garrytan/gstack"
+    - "https://www.pulumi.com/blog/claude-code-orchestration-frameworks/"
+  profile_verified_at: "2026-06-18"

@@ -1,0 +1,92 @@
+# Taskmaster — registry entry. Verified 2026-06-26 (see provenance).
+
+id: taskmaster
+name: Taskmaster
+aliases:
+  - "Task Master"
+  - "Task Master AI"
+  - "task-master-ai"
+  - "eyaltoledano/claude-task-master"
+
+primary_category: spec
+tags:
+  - task-management
+  - prd
+  - mcp
+  - cli
+  - multi-model
+
+summary: "AI task-management layer that turns a PRD into dependency-aware tasks/subtasks and exposes them through CLI/MCP for coding agents."
+
+source:
+  repo: "https://github.com/eyaltoledano/claude-task-master"
+  homepage: "https://tryhamster.com/product/taskmaster"
+
+version:
+  kind: release
+  ref: "task-master-ai@0.43.1"
+  released_at: "2026-03-31"
+
+verified_at: "2026-06-26"
+
+status: active
+
+ecosystem:
+  - claude-code
+  - cursor
+  - windsurf
+  - codex
+  - roo-code
+  - vscode
+  - amazon-q
+
+first_seen: "0.4.0"
+last_changed: "0.4.0"
+
+notes: >-
+  MIT with Commons Clause; review resale / hosted-service restrictions before
+  commercial redistribution. Requires Node 20+. Writes project state under
+  .taskmaster/ and can run as an MCP server with many optional model providers.
+
+profile:
+  problem_solved: "Agent work loses sequencing and state; Taskmaster turns PRDs into dependency-aware tasks/subtasks and keeps progress in .taskmaster/."
+  strengths:
+    - "PRD parsing into structured tasks with dependencies, priorities, implementation details, and test strategies"
+    - "CLI plus MCP integrations for common AI coding editors and Claude Code"
+    - "Configurable main/research/fallback models and MCP tool loading modes"
+  weaknesses:
+    - "Task-state layer, not a full requirements/design authority"
+    - "Token overhead rises quickly when research-backed updates or all MCP tools are enabled"
+    - "Node/MCP/API-key setup plus .taskmaster state is too much for small tasks"
+  token_cost_profile: medium
+  learning_curve: medium
+  setup_complexity: medium
+  maturity: established
+  team_fit: both
+  project_fit: both
+  autonomy_level: supervised
+  multi_model: true
+  security_signals:
+    - "MIT with Commons Clause — review resale / hosted-service restrictions before redistribution"
+    - "Stores config and task state under .taskmaster/; keep API keys in env or MCP config and out of git"
+    - "MCP can expose many tools; prefer TASK_MASTER_TOOLS=core or standard until audited"
+  plays_well_with:
+    - agents-md
+    - superpowers
+  conflicts_with:
+    - openspec
+    - spec-kit
+    - bmad
+    - kiro
+    - codestable
+    - comet
+  best_fit: "Project with a PRD or growing backlog that needs the agent to respect dependencies, priorities, and task state."
+  anti_fit: "Quick one-off, tiny fix, or team that already has a maintained issue tracker/spec workflow it wants to keep authoritative."
+  provenance:
+    - "https://github.com/eyaltoledano/claude-task-master/releases/tag/task-master-ai%400.43.1"
+    - "https://github.com/eyaltoledano/claude-task-master"
+    - "https://github.com/eyaltoledano/claude-task-master/blob/main/package.json"
+    - "https://github.com/eyaltoledano/claude-task-master/blob/main/docs/configuration.md"
+    - "https://github.com/eyaltoledano/claude-task-master/blob/main/docs/task-structure.md"
+    - "https://github.com/eyaltoledano/claude-task-master/blob/main/LICENSE"
+  profile_verified_at: "2026-06-26"

@@ -1,0 +1,79 @@
+# OpenSpec — registry entry.
+# Version + profile verified 2026-06-18 against the GitHub releases page (see provenance).
+
+id: openspec
+name: OpenSpec
+aliases:
+  - "OpenSpec by Fission-AI"
+
+primary_category: spec
+tags:
+  - sdd
+  - brownfield
+  - lightweight
+
+summary: "Lightweight spec layer — specs/ as current state, changes/ as proposals — to align humans and AI before coding."
+
+source:
+  repo: "https://github.com/Fission-AI/OpenSpec"
+  homepage: "https://github.com/Fission-AI/OpenSpec"
+
+version:
+  kind: release
+  ref: "v1.4.1"
+  released_at: "2026-06-03"
+
+verified_at: "2026-06-18"
+
+status: active
+
+ecosystem:
+  - claude-code
+  - codex
+  - cursor
+  - copilot
+  - gemini-cli
+  - opencode
+
+first_seen: "0.1.0"
+last_changed: "0.3.0"
+
+notes: >-
+  Brownfield-first; highest bang-for-buck spec layer. Main risk is spec drift —
+  specs must be kept in sync with code or they mislead the AI. MIT; pure
+  specs-in-repo (no MCP / API keys / external services).
+
+profile:
+  problem_solved: "AI agents lose intent across sessions and vibe-code; a durable in-repo spec keeps humans and agents aligned before code."
+  strengths:
+    - "Pure specs-in-repo: no API keys, MCP, or external services"
+    - "Lightweight and brownfield-friendly — adopt incrementally on one slice"
+    - "Tool-agnostic spec format works across 20+ agents"
+  weaknesses:
+    - "Requires upfront spec-authoring discipline"
+    - "Spec drift if specs aren't reviewed on each change"
+  token_cost_profile: low
+  learning_curve: medium
+  setup_complexity: low
+  maturity: emerging
+  team_fit: both
+  project_fit: both
+  autonomy_level: supervised
+  multi_model: true
+  security_signals: []
+  plays_well_with:
+    - agents-md
+    - superpowers
+  conflicts_with:
+    - spec-kit
+    - bmad
+    - kiro
+    - taskmaster
+    - codestable
+    - comet
+  best_fit: "Brownfield codebase that needs maintainability + low token cost without heavy ceremony."
+  anti_fit: "Pure throwaway scripts, or teams with zero intention of maintaining specs."
+  provenance:
+    - "https://github.com/Fission-AI/OpenSpec/releases"
+    - "https://github.com/Fission-AI/OpenSpec"
+  profile_verified_at: "2026-06-18"

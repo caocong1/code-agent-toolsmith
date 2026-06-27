@@ -1,0 +1,80 @@
+# Kiro — registry entry. Verified 2026-06-18 (see provenance).
+# Proprietary AWS IDE — no public semver; versioned as a rolling GA service.
+
+id: kiro
+name: Kiro
+aliases:
+  - "AWS Kiro"
+  - "Kiro IDE"
+
+primary_category: ide-platform
+tags:
+  - spec
+  - sdd
+  - ide
+  - aws
+  - proprietary
+
+summary: "AWS's agentic IDE that mandates a spec-driven workflow (requirements → design → tasks → code) with built-in property-based testing and checkpoints."
+
+source:
+  homepage: "https://kiro.dev"
+
+version:
+  kind: rolling
+  ref: "GA"
+  released_at: "2025-11-17"
+
+verified_at: "2026-06-18"
+
+status: active
+
+ecosystem:
+  - kiro
+  - claude-code
+
+first_seen: "0.3.0"
+last_changed: "0.3.0"
+
+notes: >-
+  Proprietary AWS service (GA 2025-11-17), continuously updated — no public
+  semver. Cross-layer: an IDE/platform that also bundles a spec workflow.
+  Recommend only when the user accepts the IDE + AWS account; credit-based
+  pricing with per-model multipliers.
+
+profile:
+  problem_solved: "Enforces formal specs before any AI code generation, inside a full IDE rather than as a bolt-on."
+  strengths:
+    - "Spec-first workflow built into the IDE; property-based testing from specs"
+    - "Checkpoints/rollback during agent execution"
+    - "Enterprise posture (AWS IAM Identity Center, centralized billing)"
+  weaknesses:
+    - "Proprietary; AWS account + vendor lock-in"
+    - "Opaque credit-based cost with per-model multipliers"
+    - "Bound to its own IDE — not a drop-in for your existing agent"
+  token_cost_profile: medium
+  learning_curve: medium
+  setup_complexity: medium
+  maturity: established
+  team_fit: both
+  project_fit: both
+  autonomy_level: supervised
+  multi_model: true
+  security_signals:
+    - "Agent hooks can execute autonomously when configured — review hook config"
+    - "Proprietary AWS service — telemetry/data policy not fully public; vendor lock-in"
+  plays_well_with: []
+  conflicts_with:
+    - openspec
+    - spec-kit
+    - bmad
+    - taskmaster
+    - codestable
+    - comet
+  best_fit: "AWS-committed team that wants spec-driven rigor inside a managed IDE."
+  anti_fit: "Non-AWS shops, cost-sensitive or open-source-first teams, or anyone wanting to stay in their current agent."
+  provenance:
+    - "https://kiro.dev"
+    - "https://kiro.dev/blog/general-availability/"
+    - "https://kiro.dev/pricing/"
+  profile_verified_at: "2026-06-18"

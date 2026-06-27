@@ -1,0 +1,81 @@
+# Get Shit Done (GSD) — registry entry. Verified 2026-06-18 (see provenance).
+
+id: gsd
+name: Get Shit Done (GSD)
+aliases:
+  - "GSD"
+  - "open-gsd"
+
+primary_category: orchestration
+tags:
+  - subagents
+  - context-management
+  - spec-driven
+
+summary: "Phase-based orchestration that spawns fresh-context subagents (Discuss → Plan → Execute → Verify → Ship) to fight context rot on long tasks."
+
+source:
+  repo: "https://github.com/open-gsd/gsd-core"
+  homepage: "https://opengsd.net"
+
+version:
+  kind: release
+  ref: "v1.5.0"
+  released_at: "2026-06-17"
+
+verified_at: "2026-06-18"
+
+status: active
+
+ecosystem:
+  - claude-code
+  - opencode
+  - gemini-cli
+  - codex
+  - copilot
+  - cursor
+
+first_seen: "0.3.0"
+last_changed: "0.3.0"
+
+notes: >-
+  MIT. Repo moved from gsd-build (archived) to open-gsd/gsd-core in mid-2026 —
+  verify you're on the maintained fork. Good for long, multi-phase work; spawns
+  multiple subagents (token-heavy).
+
+profile:
+  problem_solved: "Long agent sessions degrade (context rot); GSD externalizes state to files and runs fresh subagents per phase."
+  strengths:
+    - "Disciplined 5-phase loop with persistent file state"
+    - "Parallel research/execution; reproducible phases"
+    - "Combats context rot on long tasks"
+  weaknesses:
+    - "Orchestrator overhead; not for single-file tweaks"
+    - "Requires external state discipline"
+  token_cost_profile: high
+  learning_curve: medium
+  setup_complexity: medium
+  maturity: emerging
+  team_fit: both
+  project_fit: both
+  autonomy_level: supervised
+  multi_model: true
+  security_signals:
+    - "Spawns multiple fresh-context subagents — high, sometimes surprising, token spend"
+    - "Repo recently moved gsd-build → open-gsd — confirm the maintained source"
+  plays_well_with:
+    - openspec
+    - spec-kit
+    - agents-md
+  conflicts_with:
+    - ralph
+    - trellis
+    - ccw
+    - gstack
+    - omc
+  best_fit: "Long, multi-phase, spec-heavy task where context rot is the main pain."
+  anti_fit: "Trivial fixes or single-file edits where subagent overhead isn't justified."
+  provenance:
+    - "https://github.com/open-gsd/gsd-core"
+    - "https://opengsd.net"
+  profile_verified_at: "2026-06-18"

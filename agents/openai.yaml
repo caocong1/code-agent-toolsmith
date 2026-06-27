@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Agent Toolsmith"
+  short_description: "AI coding tool stack advisor"
+  default_prompt: "Use $code-agent-toolsmith to recommend a right-sized AI coding tool stack and adoption plan for my project."

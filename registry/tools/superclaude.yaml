@@ -1,0 +1,84 @@
+# SuperClaude — registry entry. Verified 2026-06-26 (see provenance).
+
+id: superclaude
+name: SuperClaude Framework
+aliases:
+  - "SuperClaude"
+  - "SuperClaude_Framework"
+  - "SuperClaude-Org/SuperClaude_Framework"
+  - "NomenAK/SuperClaude"
+
+primary_category: skill
+tags:
+  - claude-code
+  - slash-commands
+  - agents
+  - modes
+  - mcp
+
+summary: "Claude Code configuration framework that installs /sc commands, specialist agents, behavioral modes, and optional MCP integrations."
+
+source:
+  repo: "https://github.com/SuperClaude-Org/SuperClaude_Framework"
+  homepage: "https://superclaude.netlify.app/"
+
+version:
+  kind: release
+  ref: "v4.3.0"
+  released_at: "2026-03-22"
+
+verified_at: "2026-06-26"
+
+status: active
+
+ecosystem:
+  - claude-code
+
+first_seen: "0.4.0"
+last_changed: "0.4.0"
+
+notes: >-
+  MIT. The older NomenAK/SuperClaude URL resolves to the SuperClaude-Org repo,
+  so the org repo is treated as canonical. Current v4.x uses slash commands and
+  agents; the TypeScript plugin system is documented as a future v5 direction.
+
+profile:
+  problem_solved: "Claude Code lacks a complete opinionated workflow surface; SuperClaude adds commands, agents, modes, and MCP guidance for structured development."
+  strengths:
+    - "Large lifecycle surface: 30 slash commands, 20 agents, 7 behavioral modes, and optional MCP integrations"
+    - "Maps onto Claude Code native extension points for commands and agents"
+    - "Includes quality, testing, research, project-management, and session workflows"
+  weaknesses:
+    - "Claude-Code-specific; poor fit for model-agnostic teams"
+    - "Large command/agent surface raises learning and context overhead"
+    - "Some plugin-system docs describe future v5 plans, not current stable behavior"
+  token_cost_profile: high
+  learning_curve: high
+  setup_complexity: medium
+  maturity: established
+  team_fit: both
+  project_fit: both
+  autonomy_level: supervised
+  multi_model: false
+  security_signals:
+    - "Installs third-party commands and agents into Claude Code configuration — audit before broad use"
+    - "Optional MCP servers can add browser, search, API-key, and external-tool access; scope permissions"
+    - "Latest release notes include security hardening; keep current on supported versions"
+  plays_well_with:
+    - agents-md
+    - openspec
+    - taskmaster
+  conflicts_with:
+    - superpowers
+    - ecc
+    - omc
+  best_fit: "Claude Code user or team that wants an opinionated command-driven workflow layer with specialist agents and optional MCPs."
+  anti_fit: "Teams that need model-agnostic guidance, minimal context, or no third-party command/agent pack in Claude config."
+  provenance:
+    - "https://github.com/SuperClaude-Org/SuperClaude_Framework/releases/tag/v4.3.0"
+    - "https://github.com/SuperClaude-Org/SuperClaude_Framework"
+    - "https://github.com/SuperClaude-Org/SuperClaude_Framework/blob/master/README.md"
+    - "https://github.com/SuperClaude-Org/SuperClaude_Framework/blob/master/docs/user-guide/commands.md"
+    - "https://github.com/SuperClaude-Org/SuperClaude_Framework/blob/master/docs/user-guide/claude-code-integration.md"
+    - "https://github.com/SuperClaude-Org/SuperClaude_Framework/blob/master/SECURITY.md"
+  profile_verified_at: "2026-06-26"

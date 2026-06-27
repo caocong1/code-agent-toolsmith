@@ -1,0 +1,96 @@
+# ECC — registry entry. Verified 2026-06-26 (see provenance).
+
+id: ecc
+name: ECC
+aliases:
+  - "Everything Claude Code"
+  - "affaan-m/ECC"
+  - "ecc-universal"
+  - "ecc@ecc"
+
+primary_category: skill
+tags:
+  - claude-code
+  - codex
+  - cross-harness
+  - agents
+  - skills
+  - hooks
+  - rules
+  - mcp
+
+summary: "Cross-harness agent operating system that packages agents, skills, hooks, rules, MCP conventions, and operator workflows for Claude Code and peer CLIs."
+
+source:
+  repo: "https://github.com/affaan-m/ECC"
+  homepage: "https://ecc.tools/"
+
+version:
+  kind: release
+  ref: "v2.0.0"
+  released_at: "2026-06-10"
+
+verified_at: "2026-06-26"
+
+status: active
+
+ecosystem:
+  - claude-code
+  - codex
+  - cursor
+  - opencode
+  - gemini
+  - zed
+  - github-copilot
+
+first_seen: "0.4.0"
+last_changed: "0.4.0"
+
+notes: >-
+  MIT. IDENTITY CONFIRMED: primary sources identify the canonical repo as
+  affaan-m/ECC, with "Everything Claude Code" as an alias/branding label, the
+  npm package as ecc-universal, and the Claude Code plugin id as ecc@ecc. Do not
+  treat generic ECC search hits as canonical without verifying this owner/repo.
+  ECC is broader than a small skill pack: it installs or exposes agents, skills,
+  commands, hooks, rules, MCP config, cross-harness config, dashboards, and
+  operator workflows. Treat it as the active skill/harness surface if adopted.
+
+profile:
+  problem_solved: "Claude Code and adjacent harnesses need a large reusable workflow surface; ECC packages cross-harness agents, skills, hooks, rules, MCP conventions, and operator state."
+  strengths:
+    - "Large public catalog of agents, skills, legacy command shims, rules, hooks, and MCP conventions"
+    - "Cross-harness packaging covers Claude Code plus Codex, Cursor, OpenCode, Gemini, Zed, and terminal workflows"
+    - "Includes lifecycle utilities such as doctor/repair/uninstall, a dashboard, hook controls, and install-state tracking"
+  weaknesses:
+    - "Very broad surface area; learning and audit cost are high"
+    - "Claude Code plugin install and full manual installer can duplicate skills and runtime behavior if mixed"
+    - "Some multi-model commands require a separate ccg-workflow runtime"
+  token_cost_profile: high
+  learning_curve: high
+  setup_complexity: high
+  maturity: established
+  team_fit: both
+  project_fit: both
+  autonomy_level: supervised
+  multi_model: true
+  security_signals:
+    - "Installs third-party agents, skills, hooks, rules, MCP config, scripts, and harness config — audit before use"
+    - "Primary docs warn not to combine plugin install with full manual install because that can duplicate skills and runtime behavior"
+    - "Optional multi-model commands depend on the separate ccg-workflow runtime; audit that runtime before enabling"
+    - "Session summaries, learned skills, aliases, and metrics may be written under the configured agent data home"
+  plays_well_with:
+    - agents-md
+  conflicts_with:
+    - superpowers
+    - superclaude
+    - omc
+  best_fit: "Claude Code or cross-harness user who wants one large, opinionated agent/skill/hook/rule surface and is willing to audit and own that surface."
+  anti_fit: "Small tasks, minimal-context workflows, or teams that need a lightweight methodology pack instead of a broad harness operating layer."
+  provenance:
+    - "https://github.com/affaan-m/ECC/releases/tag/v2.0.0"
+    - "https://github.com/affaan-m/ECC/tree/v2.0.0"
+    - "https://github.com/affaan-m/ECC/blob/v2.0.0/README.md"
+    - "https://github.com/affaan-m/ECC/blob/v2.0.0/package.json"
+    - "https://github.com/affaan-m/ECC/blob/v2.0.0/LICENSE"
+    - "https://ecc.tools/"
+  profile_verified_at: "2026-06-26"

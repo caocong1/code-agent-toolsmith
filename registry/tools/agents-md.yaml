@@ -1,0 +1,74 @@
+# AGENTS.md — base-standard convention entry. Verified 2026-06-18.
+# A rolling open standard (no version), not a versioned product.
+
+id: agents-md
+name: AGENTS.md
+aliases:
+  - "AGENTS.md standard"
+
+primary_category: base-standard
+tags:
+  - convention
+  - instruction-file
+  - open-standard
+
+summary: "An open, Markdown instruction-file standard that gives coding agents project-specific context — the near-universal base layer."
+
+source:
+  homepage: "https://agents.md"
+
+version:
+  kind: rolling
+  ref: "rolling"
+  released_at: null
+
+verified_at: "2026-06-18"
+
+status: active
+
+ecosystem:
+  - claude-code
+  - codex
+  - cursor
+  - copilot
+  - gemini-cli
+  - opencode
+
+first_seen: "0.3.0"
+last_changed: "0.3.0"
+
+notes: >-
+  Rolling open standard (no versioning), stewarded by the Agentic AI Foundation
+  (Linux Foundation); adopted by 60k+ projects and 20+ tools. Plain Markdown,
+  no required fields. The almost-always-on base layer; cheap and low-token.
+
+profile:
+  problem_solved: "Agents lack durable project context; a single instruction file gives consistent guidance across tools."
+  strengths:
+    - "Near-universal support; tool-agnostic"
+    - "Trivial to adopt; very low token cost"
+    - "Reduces drift by centralizing conventions"
+  weaknesses:
+    - "Just context, not a workflow — no enforcement"
+    - "Can bloat if overloaded; keep it lean"
+  token_cost_profile: low
+  learning_curve: low
+  setup_complexity: low
+  maturity: established
+  team_fit: both
+  project_fit: both
+  autonomy_level: assisted
+  multi_model: true
+  security_signals: []
+  plays_well_with:
+    - openspec
+    - spec-kit
+    - bmad
+    - agent-os
+    - superpowers
+  conflicts_with: []
+  best_fit: "Essentially every project — the default base layer before any heavier tooling."
+  anti_fit: "Nothing meaningful; even one-offs are rarely harmed by a short AGENTS.md."
+  provenance:
+    - "https://agents.md"
+  profile_verified_at: "2026-06-18"

@@ -1,0 +1,74 @@
+# Superpowers — registry entry. Verified 2026-06-18 (see provenance).
+
+id: superpowers
+name: Superpowers
+aliases:
+  - "obra/superpowers"
+
+primary_category: skill
+tags:
+  - methodology
+  - tdd
+  - claude-code
+
+summary: "Composable Markdown skills that encode engineering discipline (brainstorm → plan → TDD → review) as reusable commands for AI agents."
+
+source:
+  repo: "https://github.com/obra/superpowers"
+  homepage: "https://github.com/obra/superpowers"
+
+version:
+  kind: release
+  ref: "v6.0.2"
+  released_at: "2026-06-17"
+
+verified_at: "2026-06-18"
+
+status: active
+
+ecosystem:
+  - claude-code
+  - cursor
+  - copilot
+  - gemini-cli
+  - opencode
+
+first_seen: "0.3.0"
+last_changed: "0.3.0"
+
+notes: >-
+  MIT, by Jesse Vincent (obra). Methodology-as-skills; widely adopted. Adds
+  discipline but also ceremony/tokens on small tasks — keep scoped. As a
+  third-party skill pack, audit before install.
+
+profile:
+  problem_solved: "Agents skip engineering rigor; Superpowers injects TDD, planning, and review as invocable skills."
+  strengths:
+    - "Encodes proven discipline (failing test first, root-cause debugging, two-stage review)"
+    - "Composable, model-agnostic Markdown skills"
+    - "Large, active community"
+  weaknesses:
+    - "High cognitive load — many skills to learn"
+    - "Ceremony/token overhead on trivial changes"
+  token_cost_profile: medium
+  learning_curve: high
+  setup_complexity: low
+  maturity: established
+  team_fit: both
+  project_fit: both
+  autonomy_level: supervised
+  multi_model: true
+  security_signals:
+    - "Third-party skill pack — audit the skills before installing"
+  plays_well_with:
+    - agents-md
+    - openspec
+  conflicts_with:
+    - superclaude
+    - ecc
+  best_fit: "Solo dev or team wanting enforced TDD/planning/review discipline inside their agent."
+  anti_fit: "Throwaway tasks, or anyone wanting minimal ceremony."
+  provenance:
+    - "https://github.com/obra/superpowers/releases"
+    - "https://github.com/obra/superpowers"
+  profile_verified_at: "2026-06-18"

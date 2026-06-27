@@ -1,0 +1,79 @@
+# Ralph (Ralph Wiggum loop) — registry entry. Verified 2026-06-18.
+# A TECHNIQUE, not a packaged product (originated by Geoffrey Huntley).
+
+id: ralph
+name: Ralph (Ralph Wiggum loop)
+aliases:
+  - "Ralph technique"
+  - "Ralph Wiggum loop"
+
+primary_category: orchestration
+tags:
+  - full-auto
+  - loop
+  - technique
+
+summary: "A full-auto technique: run a coding agent in a loop with fresh context each iteration, using files/git as memory, for hands-off multi-hour runs."
+
+source:
+  repo: "https://github.com/ghuntley/how-to-ralph-wiggum"
+  homepage: "https://ghuntley.com/ralph/"
+
+version:
+  kind: none
+  ref: "technique (no formal version)"
+  released_at: null
+
+verified_at: "2026-06-18"
+
+status: active
+
+ecosystem:
+  - claude-code
+  - codex
+
+first_seen: "0.3.0"
+last_changed: "0.3.0"
+
+notes: >-
+  A TECHNIQUE, not a packaged product — originated by Geoffrey Huntley
+  (ghuntley.com/ralph); multiple community implementations exist. License
+  inferred MIT (no explicit LICENSE confirmed). Highest-risk option (full-auto).
+
+profile:
+  problem_solved: "Single-session context limits cap autonomous runs; Ralph restarts fresh each loop, persisting state in files/git."
+  strengths:
+    - "Radically simple (a bash loop); no framework"
+    - "Cheap autonomy for well-specified greenfield work"
+    - "Avoids context-window collapse"
+  weaknesses:
+    - "Unbounded autonomy — can commit/push/delete without review"
+    - "Hard to debug multi-iteration failures after the fact"
+    - "Poor fit for brownfield (must re-understand context each loop)"
+  token_cost_profile: high
+  learning_curve: low
+  setup_complexity: low
+  maturity: emerging
+  team_fit: solo
+  project_fit: greenfield
+  autonomy_level: autonomous
+  multi_model: true
+  security_signals:
+    - "Full-auto loop runs unbounded shell/git commands without per-step review — run on an isolated branch with tight limits"
+    - "Can accrue large unattended API spend"
+    - "REQUIRES a trustworthy test gate — without strong tests it compounds errors"
+  plays_well_with:
+    - openspec
+    - agents-md
+  conflicts_with:
+    - gsd
+    - trellis
+    - ccw
+    - gstack
+    - omc
+  best_fit: "Greenfield, well-specified, time-boxed task with strong tests and an isolated branch."
+  anti_fit: "Brownfield, weak/no tests, security-critical work, or any no-review-allowed context."
+  provenance:
+    - "https://ghuntley.com/ralph/"
+    - "https://github.com/ghuntley/how-to-ralph-wiggum"
+  profile_verified_at: "2026-06-18"

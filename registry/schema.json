@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/caocong1/code-agent-toolsmith/blob/main/registry/schema.json",
+  "title": "code-agent-toolsmith tool entry",
+  "description": "Machine-enforceable schema for registry/tools/<id>.yaml. Mirror of registry/schema.yaml. Cross-field rules that JSON Schema cannot express (verified_at MUST NOT be guessed; conflicts_with MUST be symmetric) are enforced by the lint in the verification step / Phase 3 pipeline.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "primary_category",
+    "summary",
+    "source",
+    "version",
+    "verified_at",
+    "status",
+    "first_seen",
+    "last_changed"
+  ],
+  "$defs": {
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "nullableDate": {
+      "oneOf": [
+        { "$ref": "#/$defs/date" },
+        { "type": "null" }
+      ]
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "toolId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "triState": {
+      "enum": ["low", "medium", "high"]
+    }
+  },
+  "properties": {
+    "id": { "$ref": "#/$defs/toolId" },
+    "name": { "type": "string", "minLength": 1 },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "primary_category": {
+      "enum": ["base-standard", "spec", "skill", "orchestration", "ide-platform", "directory"]
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "summary": { "type": "string", "minLength": 1 },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "repo": { "type": "string" },
+        "homepage": { "type": "string" }
+      }
+    },
+    "version": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "ref"],
+      "properties": {
+        "kind": {
+          "enum": ["release", "tag", "commit", "date", "rolling", "none"]
+        },
+        "ref": { "type": "string", "minLength": 1 },
+        "released_at": { "$ref": "#/$defs/nullableDate" }
+      }
+    },
+    "verified_at": { "$ref": "#/$defs/nullableDate" },
+    "status": {
+      "enum": ["active", "maintained", "deprecated", "removed", "unknown"]
+    },
+    "removed_at": { "$ref": "#/$defs/nullableDate" },
+    "ecosystem": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "first_seen": { "$ref": "#/$defs/semver" },
+    "last_changed": { "$ref": "#/$defs/semver" },
+    "notes": { "type": "string" },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "problem_solved": { "type": "string" },
+        "strengths": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "weaknesses": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "token_cost_profile": { "$ref": "#/$defs/triState" },
+        "learning_curve": { "$ref": "#/$defs/triState" },
+        "setup_complexity": { "$ref": "#/$defs/triState" },
+        "maturity": {
+          "enum": ["experimental", "emerging", "established"]
+        },
+        "team_fit": {
+          "enum": ["solo", "team", "both"]
+        },
+        "project_fit": {
+          "enum": ["greenfield", "brownfield", "both"]
+        },
+        "autonomy_level": {
+          "enum": ["assisted", "supervised", "autonomous"]
+        },
+        "multi_model": { "type": "boolean" },
+        "security_signals": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "plays_well_with": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/toolId" }
+        },
+        "conflicts_with": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/toolId" }
+        },
+        "best_fit": { "type": "string" },
+        "anti_fit": { "type": "string" },
+        "provenance": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "profile_verified_at": { "$ref": "#/$defs/nullableDate" }
+      }
+    }
+  }
+}

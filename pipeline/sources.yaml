@@ -1,0 +1,39 @@
+# Discovery sources for the self-update loop (pipeline/research-playbook.md, stage 1).
+# These are INPUTS to scan for candidate tools — they are NOT themselves
+# recommended to users (they are the `directory` layer; see references/taxonomy.md).
+# Keep this list curated; the loop fans out over it to find new/changed tools.
+
+# Curated awesome-lists and skill/plugin directories.
+directories:
+  - name: "Anthropic Skills"
+    url: "https://github.com/anthropics/skills"
+    note: "First-party Agent Skills reference."
+  - name: "awesome-claude-code"
+    url: "https://github.com/hesreallyhim/awesome-claude-code"
+    note: "Community index of Claude Code tooling, skills, hooks."
+  - name: "awesome-agent-skills"
+    url: "https://github.com/topics/agent-skills"
+    note: "GitHub topic aggregation for agent skills."
+  - name: "awesome-ralph"
+    url: "https://github.com/snwfdhmp/awesome-ralph"
+    note: "Implementations/resources for the Ralph full-auto loop technique."
+
+# GitHub search queries (run via search API or web). Tune over time.
+github_search_queries:
+  - "spec-driven development AI coding agent"
+  - "claude code orchestration framework"
+  - "AI agent workflow harness multi-model"
+  - "AGENTS.md OR CLAUDE.md tooling"
+  - "coding agent skills methodology TDD"
+
+# Backlog seed list for future discovery refreshes.
+# The loop should research any future entries and either profile them or mark them UNVERIFIED.
+# Profiled and frozen in the v0.4.0 candidate expansion:
+# taskmaster, superclaude, codestable, comet, ecc, omc.
+backlog_candidates: []
+
+# Primary-source patterns the research stage prefers over search snippets.
+version_sources:
+  - "<repo>/releases"
+  - "<repo>/tags"
+  - "official homepage / docs changelog"

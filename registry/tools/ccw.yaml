@@ -1,0 +1,77 @@
+# Claude-Code-Workflow (CCW) — registry entry. Verified 2026-06-18.
+
+id: ccw
+name: Claude-Code-Workflow
+aliases:
+  - "CCW"
+
+primary_category: orchestration
+tags:
+  - workflow-as-code
+  - multi-model
+  - json
+
+summary: "JSON-driven multi-agent orchestration for Claude Code: declarative workflows, CLI routing, a skill registry, and terminal dashboards."
+
+source:
+  repo: "https://github.com/catlog22/Claude-Code-Workflow"
+  homepage: "https://catlog22.github.io/Claude-Code-Workflow/"
+
+version:
+  kind: release
+  ref: "v7.3.14"
+  released_at: "2026-05-05"
+
+verified_at: "2026-06-18"
+
+status: active
+
+ecosystem:
+  - claude-code
+  - gemini-cli
+  - codex
+
+first_seen: "0.3.0"
+last_changed: "0.3.0"
+
+notes: >-
+  MIT. Most prescriptive of the harnesses (workflow-as-JSON); strong for
+  repeatable team/sprint orchestration. Steep onboarding (28+ commands, 37
+  skills). Smaller community than GSD/Trellis.
+
+profile:
+  problem_solved: "Complex multi-model workflows are ad-hoc; CCW makes them declarative, repeatable JSON specs with routing and monitoring."
+  strengths:
+    - "Declarative, auditable workflow specs"
+    - "Rich command/skill library; session lifecycle + dashboards"
+    - "Multi-model CLI routing"
+  weaknesses:
+    - "High abstraction barrier (JSON workflow expertise)"
+    - "Smaller community / adoption lag"
+  token_cost_profile: high
+  learning_curve: high
+  setup_complexity: high
+  maturity: emerging
+  team_fit: team
+  project_fit: both
+  autonomy_level: supervised
+  multi_model: true
+  security_signals:
+    - "Routes work across multiple model CLIs — scope each CLI's tool access"
+    - "Workflow-as-code (JSON) — audit workflow definitions before running"
+  plays_well_with:
+    - openspec
+    - spec-kit
+    - agents-md
+  conflicts_with:
+    - ralph
+    - gsd
+    - trellis
+    - gstack
+    - omc
+  best_fit: "Team wanting repeatable, auditable multi-model sprint workflows."
+  anti_fit: "Simple tasks, single-model users, or anyone averse to workflow-as-code."
+  provenance:
+    - "https://github.com/catlog22/Claude-Code-Workflow"
+    - "https://catlog22.github.io/Claude-Code-Workflow/"
+  profile_verified_at: "2026-06-18"

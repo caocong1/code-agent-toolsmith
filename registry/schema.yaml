@@ -1,0 +1,172 @@
+# registry/schema.yaml
+# Field specification for every tool entry under registry/tools/<id>.yaml.
+# Human-readable spec. The machine-enforceable mirror is registry/schema.json
+# (validate with `python -m jsonschema` or `ajv`). Keep the two in sync; the
+# Phase 3 self-update pipeline reuses schema.json as its validation gate.
+
+fields:
+  id:
+    type: string
+    required: true
+    rule: "lowercase, hyphenated, stable; MUST equal the filename without extension"
+    example: "openspec"
+
+  name:
+    type: string
+    required: true
+    desc: "Display name"
+    example: "OpenSpec"
+
+  aliases:
+    type: list<string>
+    required: false
+    desc: "Full names / abbreviations the tool is also known by"
+    example: ["CCW = Claude-Code-Workflow"]
+
+  primary_category:
+    type: enum
+    required: true
+    values: [base-standard, spec, skill, orchestration, ide-platform, directory]
+    desc: "Primary taxonomy bucket (see references/taxonomy.md)"
+
+  tags:
+    type: list<string>
+    required: false
+    desc: "Secondary categories / keywords; may include other category codes for cross-layer tools"
+
+  summary:
+    type: string
+    required: true
+    rule: "one line, one claim"
+
+  source:
+    type: object
+    required: true
+    fields:
+      repo: { type: string, required: false, desc: "VCS URL" }
+      homepage: { type: string, required: false, desc: "Docs/landing URL" }
+
+  version:
+    type: object
+    required: true
+    desc: "Version triple, tolerant of tools without formal releases"
+    fields:
+      kind:
+        type: enum
+        values: [release, tag, commit, date, rolling, none]
+        desc: "release/tag if published; commit if pinning a SHA; date for snapshot-by-date; rolling if no version concept; none if unknown"
+      ref:
+        type: string
+        desc: "The actual value: e.g. 'v1.4.0', a commit SHA, '2026-06-01', or 'rolling'. Use 'TBD' until verified."
+      released_at:
+        type: string|null
+        desc: "Release/commit date YYYY-MM-DD if known, else null"
+
+  verified_at:
+    type: string|null
+    required: true
+    desc: "Date we last verified version.ref against the source (YYYY-MM-DD); null until verified"
+    rule: "MUST NOT be guessed. If null, version.ref should be 'TBD'."
+
+  status:
+    type: enum
+    required: true
+    values: [active, maintained, deprecated, removed, unknown]
+    desc: "removed entries are KEPT (not deleted); add removed_at"
+
+  removed_at:
+    type: string|null
+    required: false
+    desc: "Date the tool was observed gone/abandoned (YYYY-MM-DD), only when status=removed"
+
+  ecosystem:
+    type: list<string>
+    required: false
+    desc: "Target agents/CLIs"
+    example: ["claude-code", "codex", "cursor", "opencode", "gemini"]
+
+  first_seen:
+    type: string
+    required: true
+    desc: "Skill version (SemVer) at which this tool was first added"
+    example: "0.2.0"
+
+  last_changed:
+    type: string
+    required: true
+    desc: "Skill version (SemVer) of the most recent change to this entry"
+
+  notes:
+    type: string
+    required: false
+    desc: "Risks, security signals, suitable scenarios"
+
+  profile:
+    type: object
+    required: false
+    desc: >-
+      Decision-support profile read by the recommendation rubric
+      (references/decision-framework.md). Optional: when absent or partial the
+      rubric MUST degrade gracefully — treat unknowns conservatively (e.g.
+      unknown token cost ⇒ assume medium) and mark them "unverified" in the plan.
+    fields:
+      problem_solved:
+        type: string
+        desc: "One line: the core problem this tool addresses"
+      strengths:
+        type: list<string>
+        desc: "Concrete strengths (each a short claim)"
+      weaknesses:
+        type: list<string>
+        desc: "Concrete weaknesses / limitations"
+      token_cost_profile:
+        type: enum
+        values: [low, medium, high]
+        desc: "Typical per-task token overhead the tool tends to add"
+      learning_curve:
+        type: enum
+        values: [low, medium, high]
+      setup_complexity:
+        type: enum
+        values: [low, medium, high]
+      maturity:
+        type: enum
+        values: [experimental, emerging, established]
+        desc: "Project maturity (proxy: age, stars, release cadence)"
+      team_fit:
+        type: enum
+        values: [solo, team, both]
+      project_fit:
+        type: enum
+        values: [greenfield, brownfield, both]
+      autonomy_level:
+        type: enum
+        values: [assisted, supervised, autonomous]
+        desc: "assisted = inline help; supervised = multi-step with human gates; autonomous = full-auto loop"
+      multi_model:
+        type: boolean
+        desc: "Whether the tool exploits / requires more than one model"
+      security_signals:
+        type: list<string>
+        desc: "Concrete risk flags (e.g. runs unbounded shell in a loop; installs third-party skills — audit first); [] if none notable"
+      plays_well_with:
+        type: list<string>
+        desc: "Registry ids of tools that compose well (usually different layers)"
+      conflicts_with:
+        type: list<string>
+        desc: >-
+          Registry ids that must NOT be co-recommended (same-layer rivals, or
+          systems claiming the same dir). MUST be symmetric: if A lists B, B lists A.
+      best_fit:
+        type: string
+        desc: "One line: the situation this is the right pick for"
+      anti_fit:
+        type: string
+        desc: "One line: the situation to NOT use it for"
+      provenance:
+        type: list<string>
+        desc: "Source URLs the profile/version facts were drawn from"
+      profile_verified_at:
+        type: string|null
+        desc: "Date the profile was last checked against sources (YYYY-MM-DD); null until verified"
+        rule: "MUST NOT be guessed; same discipline as verified_at"
